@@ -1,7 +1,7 @@
 package pieces;
 
 public class Queen extends Piece{
-	Queen(String pieceName) {
+	public Queen(String pieceName) {
 		super(pieceName);
 		// TODO Auto-generated constructor stub
 	}

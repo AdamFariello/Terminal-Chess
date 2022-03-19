@@ -1,7 +1,13 @@
 package chess;
 
+import pieces.Bishop;
+import pieces.Knight;
 import pieces.Pawn;
 import pieces.Piece;
+import pieces.Rook;
+import pieces.Queen;
+import pieces.King;
+
 
 public class Chess {
 	private static int boardSideLength = 8;
@@ -30,39 +36,33 @@ public class Chess {
 	
 	public static void initializeBoard() {
 		board = new BoardSpace[boardSideLength][boardSideLength];
-		
-		/*
-		//Black Pieces
-		for (int i = 0; i < board.length; i++) 
-			board[1][i] = new BoardSpace(new Pawn("bp"));
-		
-		//White Pieces
-		for (int i = 0; i < board.length; i++)
-			board[6][i] = new BoardSpace(new Pawn("wp"));
-		
-		//Everything else
-		for (int i = 0; i < board.length; i++)
-			if (i != 1 && i != 6)
-				for (int j = 0; j < board.length; j++)
-					board[i][j] = new BoardSpace(null);
-		*/
-		
-		//Big Pieces
-		String string = "RNBQK";
-		for (int i = 0; i < string.length(); i++) {
-			board[0][i]
-					= new BoardSpace(new Pawn("b" + string.charAt(i)));
-			board[board.length - 1][i]
-					= new BoardSpace(new Pawn("w" + string.charAt(i)));
 			
-			//Copying piece on other side of the board
-			if (i != string.length() - 1) {
-				board[0][board.length - 1 - i]
-						= new BoardSpace(new Pawn("b" + string.charAt(i)));
-				board[board.length - 1][board.length - 1 - i]
-						= new BoardSpace(new Pawn("w" + string.charAt(i)));
-			}
-		}
+		//Rook
+		board[0][0] 			   = new BoardSpace(new Rook("bR"));
+		board[0][board.length - 1] = new BoardSpace(new Rook("bR"));
+		board[board.length - 1][0] = new BoardSpace(new Rook("wR"));
+		board[board.length-1][board.length-1]
+				= new BoardSpace(new Rook("wR"));
+		
+		//Knight
+		board[0][1] 				   = new BoardSpace(new Knight("bN"));
+		board[0][board.length - 1 - 1] = new BoardSpace(new Knight("bN"));
+		board[board.length - 1][1] 	   = new BoardSpace(new Knight("wN"));
+		board[board.length-1][board.length - 1 - 1]
+				= new BoardSpace(new Knight("wN"));
+		
+		//Bishop
+		board[0][2] 				   = new BoardSpace(new Bishop("bB"));
+		board[0][board.length - 1 - 2] = new BoardSpace(new Bishop("bB"));
+		board[board.length - 1][2] 	   = new BoardSpace(new Bishop("wB"));
+		board[board.length-1][board.length - 1 - 2]
+				= new BoardSpace(new Bishop("wB"));
+		
+		//Queen and King
+		board[0][3] 				   = new BoardSpace(new Queen("bQ"));
+		board[board.length - 1][3] 	   = new BoardSpace(new Queen("wQ"));
+		board[0][4] 				   = new BoardSpace(new King("bK"));
+		board[board.length - 1][4] 	   = new BoardSpace(new King("wK"));
 		
 		//Pawns
 		for (int i = 0; i < board.length; i++) {

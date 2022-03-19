@@ -2,7 +2,7 @@ package pieces;
 
 public class Bishop extends Piece{
 
-	Bishop(String pieceName) {
+	public Bishop(String pieceName) {
 		super(pieceName);
 		// TODO Auto-generated constructor stub
 	}

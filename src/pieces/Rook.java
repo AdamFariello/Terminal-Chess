@@ -2,7 +2,7 @@ package pieces;
 
 //Castle == Rook 
 public class Rook extends Piece{
-	Rook(String pieceName) {
+	public Rook(String pieceName) {
 		super(pieceName);
 		// TODO Auto-generated constructor stub
 	}

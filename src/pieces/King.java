@@ -1,14 +1,17 @@
 package pieces;
 
-public class Knight extends Piece{
-	public Knight(String pieceName) {
+public class King extends Piece{
+
+	public King(String pieceName) {
 		super(pieceName);
 		// TODO Auto-generated constructor stub
 	}
 	
-	// Legal Moves:
-	// 	1) Regular Move := Move 2 spaces in the same column then 
-	// 					   move 1 space in the same row, and vice-versa.
+	
+	//Legal moves:
+	//	1) Can move one space in any direction
+	//	2) Can not be killed, any situation where the king can be captured
+	//	   must be fixed, if it can;t be fixed, the user loses the game
 	@Override
 	boolean legalMoves(String startSpace, String endSpace) {
 		// TODO Auto-generated method stub
