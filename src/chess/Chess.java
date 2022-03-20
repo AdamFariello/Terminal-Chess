@@ -1,5 +1,7 @@
 package chess;
 
+import java.util.Scanner;
+
 import pieces.Bishop;
 import pieces.Knight;
 import pieces.Pawn;
@@ -14,7 +16,8 @@ public class Chess {
 	private static BoardSpace board [][];
 	
 	public static void displayBoard () {		
-		//Displaying the top part of the chess board		
+		//Displaying the top part of the chess board	
+		System.out.print("\n");
 		for (int i = 0; i < board.length; i++) {
 			for (int j = 0; j < board.length; j++) {
 				if (board[i][j].getPiece() != null)
@@ -31,7 +34,7 @@ public class Chess {
 		}
 		
 		//Displaying the bottom row
-		System.out.println(" a  b  c  d  e  f  g  h");
+		System.out.println(" a  b  c  d  e  f  g  h\n");
 	}
 	
 	public static void initializeBoard() {
@@ -80,7 +83,53 @@ public class Chess {
 		//Initialize
 		initializeBoard();
 		
-		//Load Game
-		displayBoard();
+		//White will always make the first move
+		boolean whiteTurn = true;
+		
+		//Game Begin
+		while (true) {
+			displayBoard();
+			
+			while (true) {
+				if (whiteTurn)
+					System.out.print("White's move: ");
+				else
+					System.out.print("Black's move: ");
+				
+				//Taking an entry
+				//Also no need to check for illegal input
+				Scanner sc = new Scanner(System.in);
+				String entry = sc.nextLine();
+				String [] entrySplit = entry.split(" ");
+				String entry1 = entrySplit[0];
+				
+				String entry2 = null, entry3 = null;
+				if (entrySplit.length > 1)
+					entry2 = entrySplit[1];
+				if (entrySplit.length > 2)
+					entry3 = entrySplit[2];
+				
+				//Handling entries
+				//There is no such thing as bad input
+				//(Read question 3 in the Frequently Asked Questions)
+				if (entry1 != null && entry2 != null && entry3 == null) {
+					//Regular move
+					//TODO
+					
+					
+					break;
+				} else if (entry1 != null && entry2 != null && entry3 != null) {
+					//Regular move with calling for a draw OR promotion
+					//TODO
+				
+					break;
+				} else {
+					//Answer to called for draw 
+					//TODO
+					
+					break;
+				}
+			}
+		}
 	}
 }

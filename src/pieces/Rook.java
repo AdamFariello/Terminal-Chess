@@ -1,28 +1,39 @@
 package pieces;
 
-//Castle == Rook 
-public class Rook extends Piece{
-	public Rook(String pieceName) {
-		super(pieceName);
-		// TODO Auto-generated constructor stub
+import java.util.LinkedList;
+
+import chess.BoardSpace;
+
+//Castle == Rook == Train
+public class Rook extends Piece {
+	Rook(String pieceName, String fileRank) {
+		super(pieceName, fileRank);
 	}
 
 	//List of legal move:
 	//	1) Regular Move := Move to a space that's on it's same row or column
-	//	2) Castling		:= If the rook and king has not made a move, and 
-	//					   there's no pieces in between the two, you can
-	//					   move the king piece two pieces and move the rook
-	//					   to the other side of the king.
-	//					   https://en.wikipedia.org/wiki/Chess#Castling
+	//  Note: The king handles castling, not the rook/Castle/train
 	@Override
-	boolean legalMoves(String startSpace, String endSpace) {
+	void setMoveList(BoardSpace[][] board, String fileRank) {
 		// TODO Auto-generated method stub
-		return false;
+		this.getMoveList().add(regularMove(board, fileRank));
 	}
 
 	@Override
-	boolean regularMove(String startSpace, String endSpace) {
-		// TODO Auto-generated method stub
-		return false;
+	LinkedList<String> regularMove(BoardSpace[][] board, String fileRank) {
+		LinkedList<String> moves = new LinkedList<String>();
+		
+		//Calculation vertical spaces
+		for (int i = 0; i < board.length; i++) {
+			
+		}
+		
+		//Calculation horizontal spaces
+		for (int i = 0; i < board.length; i++) {
+			
+		}
+		
+		if (moves.isEmpty()) return null;
+		else return moves;
 	}
 }

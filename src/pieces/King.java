@@ -1,27 +1,29 @@
 package pieces;
 
+import java.util.LinkedList;
+
 public class King extends Piece{
 
 	public King(String pieceName) {
 		super(pieceName);
-		// TODO Auto-generated constructor stub
 	}
-	
-	
+		
 	//Legal moves:
-	//	1) Can move one space in any direction
-	//	2) Can not be killed, any situation where the king can be captured
-	//	   must be fixed, if it can;t be fixed, the user loses the game
+	//	1) Regular Move := Can move one space in any direction
+	//	2) Castling		:= If the rook and king has not made a move, and 
+	//					   there's no pieces in between the two, you can
+	//					   move the king piece two pieces and move the rook
+	//					   to the other side of the king.
+	//					   https://en.wikipedia.org/wiki/Chess#Castling
 	@Override
-	boolean legalMoves(String startSpace, String endSpace) {
+	LinkedList<String> legalMoves(String fileRank) {
 		// TODO Auto-generated method stub
-		return false;
+		return null;
 	}
 
 	@Override
-	boolean regularMove(String startSpace, String endSpace) {
+	LinkedList<String> regularMove(String fileRank) {
 		// TODO Auto-generated method stub
-		return false;
+		return null;
 	}
-
 }
