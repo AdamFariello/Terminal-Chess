@@ -2,10 +2,12 @@ package pieces;
 
 import java.util.LinkedList;
 
-public class King extends Piece{
+import chess.BoardSpace;
 
-	public King(String pieceName) {
-		super(pieceName);
+public class King extends Piece{
+	public King(String pieceName, String fileRank) {
+		super(pieceName, fileRank);
+		// TODO Auto-generated constructor stub
 	}
 		
 	//Legal moves:
@@ -16,13 +18,13 @@ public class King extends Piece{
 	//					   to the other side of the king.
 	//					   https://en.wikipedia.org/wiki/Chess#Castling
 	@Override
-	LinkedList<String> legalMoves(String fileRank) {
+	void setMoveList(BoardSpace[][] board, String newfileRank) {
 		// TODO Auto-generated method stub
-		return null;
+		
 	}
 
 	@Override
-	LinkedList<String> regularMove(String fileRank) {
+	LinkedList<String> regularMove(BoardSpace[][] board, String fileRank) {
 		// TODO Auto-generated method stub
 		return null;
 	}

@@ -12,7 +12,7 @@ public abstract class Piece {
 	//If there is no space all moves will be null. 
 	private LinkedList<LinkedList <String>> moveList;
 	
-	Piece (String pieceName, String fileRank) {
+	public Piece (String pieceName, String fileRank) {
 		this.pieceName = pieceName;
 		this.fileRank  = fileRank;
 		moveList 	   = new LinkedList<LinkedList<String>>();
@@ -29,7 +29,7 @@ public abstract class Piece {
 	public String getPieceName () {
 		return pieceName;
 	}
-	public String getfileRank() {
+	public String getFileRank() {
 		return fileRank;
 	}
 	public LinkedList<LinkedList<String>> getMoveList() {

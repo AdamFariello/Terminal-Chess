@@ -6,7 +6,7 @@ import chess.BoardSpace;
 
 //Castle == Rook == Train
 public class Rook extends Piece {
-	Rook(String pieceName, String fileRank) {
+	public Rook(String pieceName, String fileRank) {
 		super(pieceName, fileRank);
 	}
 
@@ -25,7 +25,10 @@ public class Rook extends Piece {
 		
 		//Calculation vertical spaces
 		for (int i = 0; i < board.length; i++) {
-			
+			if (this.getFileRank() != fileRank && ) {
+				//TODO Create file that calculates
+				//the spot locations on the fly.
+			}
 		}
 		
 		//Calculation horizontal spaces

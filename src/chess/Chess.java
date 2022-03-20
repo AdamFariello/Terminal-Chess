@@ -38,39 +38,37 @@ public class Chess {
 	}
 	
 	public static void initializeBoard() {
-		board = new BoardSpace[boardSideLength][boardSideLength];
-			
+		board = new BoardSpace[boardSideLength][boardSideLength];	
+		//Black created first, then white.
 		//Rook
-		board[0][0] 			   = new BoardSpace(new Rook("bR"));
-		board[0][board.length - 1] = new BoardSpace(new Rook("bR"));
-		board[board.length - 1][0] = new BoardSpace(new Rook("wR"));
-		board[board.length-1][board.length-1]
-				= new BoardSpace(new Rook("wR"));
+		board[0][0] 			   			  = new BoardSpace(new Rook("bR", "a8"));
+		board[0][board.length - 1] 			  = new BoardSpace(new Rook("bR", "h8"));
+		board[board.length - 1][0] 			  = new BoardSpace(new Rook("wR", "a1"));
+		board[board.length-1][board.length-1] = new BoardSpace(new Rook("wR", "h1"));
 		
 		//Knight
-		board[0][1] 				   = new BoardSpace(new Knight("bN"));
-		board[0][board.length - 1 - 1] = new BoardSpace(new Knight("bN"));
-		board[board.length - 1][1] 	   = new BoardSpace(new Knight("wN"));
-		board[board.length-1][board.length - 1 - 1]
-				= new BoardSpace(new Knight("wN"));
+		board[0][1] 				   				= new BoardSpace(new Knight("bN", "b8"));
+		board[0][board.length - 1 - 1] 				= new BoardSpace(new Knight("bN", "g8"));
+		board[board.length - 1][1] 	   				= new BoardSpace(new Knight("wN", "h1"));
+		board[board.length-1][board.length - 1 - 1] = new BoardSpace(new Knight("wN", "g1"));
 		
 		//Bishop
-		board[0][2] 				   = new BoardSpace(new Bishop("bB"));
-		board[0][board.length - 1 - 2] = new BoardSpace(new Bishop("bB"));
-		board[board.length - 1][2] 	   = new BoardSpace(new Bishop("wB"));
-		board[board.length-1][board.length - 1 - 2]
-				= new BoardSpace(new Bishop("wB"));
+		board[0][2] 				   				= new BoardSpace(new Bishop("bB", "c8"));
+		board[0][board.length - 1 - 2] 				= new BoardSpace(new Bishop("bB", "f8"));
+		board[board.length - 1][2] 	   				= new BoardSpace(new Bishop("wB", "c1"));
+		board[board.length-1][board.length - 1 - 2] = new BoardSpace(new Bishop("wB", "f8"));
 		
 		//Queen and King
-		board[0][3] 				   = new BoardSpace(new Queen("bQ"));
-		board[board.length - 1][3] 	   = new BoardSpace(new Queen("wQ"));
-		board[0][4] 				   = new BoardSpace(new King("bK"));
-		board[board.length - 1][4] 	   = new BoardSpace(new King("wK"));
+		board[0][3] 			   = new BoardSpace(new Queen("bQ","d8"));
+		board[board.length - 1][3] = new BoardSpace(new Queen("wQ","d1"));
+		board[0][4] 			   = new BoardSpace(new King("bK", "e8"));
+		board[board.length - 1][4] = new BoardSpace(new King("wK", "e1"));
 		
 		//Pawns
+		String spots = "abcdefgh";
 		for (int i = 0; i < board.length; i++) {
-			board[1][i] = new BoardSpace(new Pawn("bp"));
-			board[board.length - 2][i] = new BoardSpace(new Pawn("wp"));
+			board[1][i] = new BoardSpace(new Pawn("bp", spots.charAt(i) + "7"));
+			board[board.length - 2][i] = new BoardSpace(new Pawn("wp", spots.charAt(i) + "2"));
 		}
 		
 		//Blank Spaces

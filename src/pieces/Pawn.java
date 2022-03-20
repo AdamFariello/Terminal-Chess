@@ -1,8 +1,13 @@
 package pieces;
 
+import java.util.LinkedList;
+
+import chess.BoardSpace;
+
 public class Pawn extends Piece{
-	public Pawn(String pieceName) {
-		super(pieceName);
+	public Pawn(String pieceName, String fileRank) {
+		super(pieceName, fileRank);
+		// TODO Auto-generated constructor stub
 	}
 	
 	//List of legal move:
@@ -14,22 +19,14 @@ public class Pawn extends Piece{
 	//	5) Promotion    := Pawn hits end of the board, it gets traded 
 	//					   for a: Queen, Rook, Bishop, or a castle
 	@Override
-	boolean legalMoves(String startSpace, String endSpace) {
-		if (regularMove(startSpace, endSpace))
-			return true;
-		return false;
+	void setMoveList(BoardSpace[][] board, String newfileRank) {
+		// TODO Auto-generated method stub
+		
 	}
 
 	@Override
-	boolean regularMove(String startSpace, String endSpace) {
-		//Debug
-		System.out.println("Pawn's LegalMoves");
-		System.out.println(this.getPieceName() + " legalName");
-		
-		//Checking
-		int difference = (startSpace.charAt(1) - '0') - (endSpace.charAt(1) - '0');
-		if (difference == 1 || difference == -1)
-			return true;
-		return false;
+	LinkedList<String> regularMove(BoardSpace[][] board, String fileRank) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }

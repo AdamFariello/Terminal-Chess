@@ -1,8 +1,12 @@
 package pieces;
 
+import java.util.LinkedList;
+
+import chess.BoardSpace;
+
 public class Knight extends Piece{
-	public Knight(String pieceName) {
-		super(pieceName);
+	public Knight(String pieceName, String fileRank) {
+		super(pieceName, fileRank);
 		// TODO Auto-generated constructor stub
 	}
 	
@@ -10,15 +14,14 @@ public class Knight extends Piece{
 	// 	1) Regular Move := Move 2 spaces in the same column then 
 	// 					   move 1 space in the same row, and vice-versa.
 	@Override
-	boolean legalMoves(String startSpace, String endSpace) {
+	void setMoveList(BoardSpace[][] board, String newfileRank) {
 		// TODO Auto-generated method stub
-		return false;
+		
 	}
 
 	@Override
-	boolean regularMove(String startSpace, String endSpace) {
+	LinkedList<String> regularMove(BoardSpace[][] board, String fileRank) {
 		// TODO Auto-generated method stub
-		return false;
+		return null;
 	}
-
 }
