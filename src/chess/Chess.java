@@ -80,7 +80,7 @@ public class Chess {
 		for (int i = 2; i < board.length - 2; i++)
 			for (int j = 0; j < board.length; j++) 
 				//TODO change 
-				//if (i != 3 || j != 3) 
+				//if (i != 3 || j != 4) 
 					board[i][j] = new BoardSpace(null);
 	}
 	
@@ -91,8 +91,8 @@ public class Chess {
 		//White will always make the first move
 		boolean whiteTurn = true;
 		displayBoard();
-		//board[3][3].getPiece().setMoveList(board);
-		//System.out.println("Rook move List: " +board[3][3].getPiece().getMoveList());
+		//board[3][4].getPiece().setMoveList(board);
+		//System.out.println("Rook move List: " +board[3][4].getPiece().getMoveList());
 		
 		/* TODO uncomment
 		//Game Begin
