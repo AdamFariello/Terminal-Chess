@@ -48,6 +48,7 @@ public class Rook extends Piece {
 			} else {
 				//Friendly piece detected, can't move there or anywhere else
 				break;
+				test
 <<<<<<< HEAD
 			}
 		}
