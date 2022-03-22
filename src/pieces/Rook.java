@@ -68,7 +68,7 @@ public class Rook extends Piece {
 		System.out.print("\n");
 		*/
 		for (int i = position[0] - 1; i > -1; i--) {
-			String temp = checkSpace(board, i, position[i]);
+			String temp = checkSpace(board, i, position[1]);
 			if (temp != null) {
 				if (Character.isUpperCase(temp.charAt(0)) == true) {
 					moves.add(temp.toLowerCase());
@@ -80,6 +80,7 @@ public class Rook extends Piece {
 				break;
 			}
 		}
+		System.out.print("\n");
 		
 		//Going Down
 		//the "+ 1" is to skip checking the same space the piece it's on
