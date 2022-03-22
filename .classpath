@@ -1,20 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <classpath>
 	<classpathentry kind="src" path="src"/>
-<<<<<<< HEAD
-<<<<<<< HEAD
-	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-11">
-		<attributes>
-			<attribute name="module" value="true"/>
-		</attributes>
-	</classpathentry>
-	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/javafx17">
-=======
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER">
->>>>>>> adam
-=======
-	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER">
->>>>>>> 341b3af (Updated: Piece to have a method to handle space legality)
 		<attributes>
 			<attribute name="module" value="true"/>
 		</attributes>
