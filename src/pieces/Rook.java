@@ -30,6 +30,7 @@ public class Rook extends Piece {
 		/*Calculation vertical spaces*/
 		//Going Up
 		//the "-1" is to skip checking the same space the piece it's on
+<<<<<<< HEAD
 		/*
 		for (int i = position[0] - 1; i > -1; i--) {
 			System.out.printf("Calculating (%d,%d) ", i, position[1]);
@@ -67,6 +68,8 @@ public class Rook extends Piece {
 		}
 		System.out.print("\n");
 		*/
+=======
+>>>>>>> a99e845 (go through)
 		for (int i = position[0] - 1; i > -1; i--) {
 			String temp = checkSpace(board, i, position[1]);
 			if (temp != null) {
