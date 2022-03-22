@@ -26,7 +26,10 @@ public abstract class Piece {
 	public abstract void setMoveList (BoardSpace [][] board);
 	public String checkSpace (BoardSpace[][] board, int x, int y) {
 		//This combines regular move and capture, pawn will override this
-		//[DEBUG] System.out.printf("Calculating (%d,%d) ", x, y);
+		//System.out.printf("Calculating (%d,%d) \n", x, y);
+		if (x > board.length || x < 0 || y > board.length || y < 0)
+			return null;
+		
 		if (board[x][y].getPiece() == null) {
 			//Blank Space, free spot
 			int [] temp = {x, y};

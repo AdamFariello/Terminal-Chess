@@ -46,11 +46,7 @@ public class Chess {
 		board = new BoardSpace[boardSideLength][boardSideLength];	
 		//Black created first, then white.
 		//Rook
-		//TODO change back after move list is fine
-		//board[0][0] 			   			  = new BoardSpace(new Rook("bR", "a8"));
-		board[0][0] = new BoardSpace(null); 
-		board[3][3] 			   			  = new BoardSpace(new Rook("bR", "d5"));
-		
+		board[0][0] 			   			  = new BoardSpace(new Rook("bR", "a8"));
 		board[0][board.length - 1] 			  = new BoardSpace(new Rook("bR", "h8"));
 		board[board.length - 1][0] 			  = new BoardSpace(new Rook("wR", "a1"));
 		board[board.length-1][board.length-1] = new BoardSpace(new Rook("wR", "h1"));
@@ -84,7 +80,7 @@ public class Chess {
 		for (int i = 2; i < board.length - 2; i++)
 			for (int j = 0; j < board.length; j++) 
 				//TODO change 
-				if (i != 3 || j != 3) 
+				//if (i != 3 || j != 3) 
 					board[i][j] = new BoardSpace(null);
 	}
 	
@@ -95,8 +91,8 @@ public class Chess {
 		//White will always make the first move
 		boolean whiteTurn = true;
 		displayBoard();
-		board[3][3].getPiece().setMoveList(board);
-		System.out.println("Rook move List: " +board[3][3].getPiece().getMoveList());
+		//board[3][3].getPiece().setMoveList(board);
+		//System.out.println("Rook move List: " +board[3][3].getPiece().getMoveList());
 		
 		/* TODO uncomment
 		//Game Begin
