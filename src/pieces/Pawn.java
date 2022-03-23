@@ -1,5 +1,11 @@
-package pieces;
+/**
+ * 
+ * @author Edison Flores
+ * @author Adam Fariello
+ * 
+ */
 
+package pieces;
 import java.util.LinkedList;
 
 import chess.BoardSpace;
@@ -8,6 +14,13 @@ import chess.rankFileConversion;
 public class Pawn extends Piece{
 	private boolean hasMoved, justUsedSpeedMove;
 	private int direction;
+	boolean moved = false;
+	
+	/**
+	 * Constructor for pawn
+	 * @param pieceName
+	 * @param fileRank
+	 */
 	public Pawn(String pieceName, String fileRank) {
 		super(pieceName, fileRank);
 		hasMoved = false;
