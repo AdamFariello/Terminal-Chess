@@ -11,10 +11,12 @@ import pieces.Piece;
 import pieces.Rook;
 import pieces.Queen;
 import pieces.King;
+import chess.ruleBook;
 
 public class Chess {
-	private static int boardSideLength = 8;
+	private static final int boardSideLength = 8;
 	private static BoardSpace board [][];
+	private static boolean draw;
 	
 	public static void displayBoard () {		
 		//Displaying the top part of the chess board	
@@ -45,6 +47,7 @@ public class Chess {
 	
 	public static void initializeBoard() {
 		board = new BoardSpace[boardSideLength][boardSideLength];	
+		
 		//Black created first, then white.
 		//Rook
 		board[0][0] 			   			  = new BoardSpace(new Rook("bR", "a8"));
@@ -101,17 +104,9 @@ public class Chess {
 	public static void main (String[] args) {
 		//Initialize
 		initializeBoard();
-		
-		//White will always make the first move
+		draw = false;
 		boolean whiteTurn = true;
-		
-		/*TODO
-		displayBoard();
-		board[7][4].getPiece().setMoveList(board);
-		board[0][4].getPiece().setMoveList(board);
-		*/
-		
-		/* TODO uncomment*/
+	
 		//Game Begin
 		while (true) {
 			/*Setup turn*/
@@ -134,28 +129,42 @@ public class Chess {
 				if (entrySplit.length > 2)
 					entry3 = entrySplit[2];
 				
-				
 				//Handling entries
 				/*TODO*/ 
-				if (entry1 != null && entry2 != null && entry3 == null) {
-					//Regular Moves
+				if (entry1 != null && entry2 != null) {
+					draw = false;
+				
+					//General
 					int [] pos = rankFileConversion.RankFiletoArray(entry1);
 					Piece piece = board[pos[0]][pos[1]].getPiece();
 					piece.setMoveList(board);
 					
 					if (piece.contains(entry2)) {
-						
+						char c = piece.getPieceName().charAt(1);
+						if (c == 'p' && piece.getMoveList().get(1).contains(entry2))
+							//TODO: Enpassant
+							ruleBook.enpassant();
+						else if (c == 'p' && piece.getMoveList().get(2).contains(entry2))
+							//TODO: Promotion
+							ruleBook.promition();		
+						else if (c == 'K' && piece.getMoveList().get(1).contains(entry2))
+							//TODO Castling
+							ruleBook.Casteling();
+						else
+							//TODO General Move
+							ruleBook.generalMove();
+					} else {
+						System.out.println("Illegal move, try again");
 					}
-				} else if (entry1 != null && entry2 != null && entry3 != null) {
-					//Regular move with calling for a draw OR promotion
-					//TODO
-				
-					break;
-				} else {
-					//Answer to called for draw 
-					//TODO
 					
-					break;
+					if (entry3 == "draw?")
+						draw = true;
+				} else {
+					//Conceding to a draw
+					if (draw)
+						System.exit(0);
+					else
+						System.out.println("Illegal move, try again");
 				}
 			}
 		}

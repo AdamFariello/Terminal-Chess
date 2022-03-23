@@ -2,7 +2,7 @@ package chess;
 
 public class ruleBook {
 
-	public void generalMove() {
+	public static void generalMove() {
 		//This will cover:
 		//	 regularMove 
 		//   Pawns two space move
@@ -10,15 +10,15 @@ public class ruleBook {
 		
 	}
 	
-	public void enpassant () {
+	public static void enpassant () {
 		
 	}
 	
-	public void promition () {
+	public static void promition () {
 		
 	}
 	
-	public void Casteling () {
+	public static void Casteling() {
 		
 		
 	}
