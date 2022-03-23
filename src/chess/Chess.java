@@ -111,9 +111,17 @@ public class Chess {
 		illegalMove = true;
 		turncount = 0;
 	
+		displayBoard();
+		board[6][1].getPiece().prepareMoveList(board);
+		System.out.println("(6,1): " +board[6][1].getPiece().getMoveList());
+		
+		board[1][1].getPiece().prepareMoveList(board);
+		System.out.println("(1,1): " +board[1][1].getPiece().getMoveList());
+		
+		/*
 		//Game Begin
 		while (true) {
-			/*Setup turn*/
+			//Setup turn
 			displayBoard();
 			illegalMove = true;
 			turncount++;
@@ -124,7 +132,7 @@ public class Chess {
 				System.out.print("Black's move: ");
 			
 			while (illegalMove) {
-				/*Taking an entry*/
+				//Taking an entry
 				//Also no need to check for illegal input
 				Scanner sc = new Scanner(System.in);
 				String entry = sc.nextLine();
@@ -139,7 +147,7 @@ public class Chess {
 					entry3 = entrySplit[2];
 				
 				//Handling entries
-				/*TODO*/ 
+				//TODO 
 				if (entry1 != null && entry2 != null) {
 					draw = false;
 				
@@ -178,5 +186,6 @@ public class Chess {
 				}
 			}
 		}
+		*/
 	}
 }

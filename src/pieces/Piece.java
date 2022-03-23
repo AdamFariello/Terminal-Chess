@@ -23,25 +23,28 @@ public abstract class Piece {
 	public void setFileRank(String fileRank) {
 		this.fileRank = fileRank;
 	}
+	public void prepareMoveList(BoardSpace[][] board) {
+		this.getMoveList().clear();
+		setMoveList(board);
+	}
 	public abstract void setMoveList (BoardSpace [][] board);
 	public String checkSpace (BoardSpace[][] board, int x, int y) {
-		//Method will (probably) be overflowed by pawn.java
-		//System.out.printf("Calculating (%d,%d) \n", x, y);
+		//[DEBUG] System.out.printf("Calculating (%d,%d) \n", x, y);
 		
 		//Checks if the variables are in bound
 		if (x >= board.length || x < 0 || y >= board.length || y < 0)
 			return null;
 		
-		//This combines regular move and capture
+		//Checks for:
+		//   1) Empty space
+		//   2) Space with enemy piece
+		//	 3) Space with friendly piece (return null)
 		if (board[x][y].getPiece() == null) {
-			//Blank Space, free spot
 			int [] temp = {x, y};
 			return rankFileConversion.ArraytoRankFile(temp);
 		} else if (board[x][y].getPiece() != null && 
 				   board[x][y].getPiece().getPieceName().charAt(0) != 
 				   this.getPieceName().charAt(0)) {
-			//Space is not empty
-			//and the space is occupied by a enemy piece
 			int [] temp = {x, y};
 			return rankFileConversion.ArraytoRankFile(temp).toUpperCase();
 		} else {
