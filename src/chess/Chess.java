@@ -161,7 +161,7 @@ public class Chess {
 					if (piece.contains(entry2)) {
 						char c = piece.getPieceName().charAt(1);
 						if (c == 'p' && piece.getMoveList().get(1).contains(entry2)) {
-							//TODO: speedMove
+							ruleBook.speedMove(board, entry1, entry2);
 							
 						} else if (c == 'p' && piece.getMoveList().get(2).contains(entry2)) {
 							//TODO: Enpassant

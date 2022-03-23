@@ -18,8 +18,16 @@ public class ruleBook {
 		board[pos1[0]][pos1[1]].setPiece(null);
 	}
 	
-	public static void speedMove() {
+	public static void speedMove(BoardSpace[][] board, String entryOld, String entryNew) {
+		/*
+		int [] pos1 = rankFileConversion.RankFiletoArray(entryOld);
+		int [] pos2 = rankFileConversion.RankFiletoArray(entryNew);
+		board[pos1[0]][pos[1]].
 		
+		board[pos2[0]][pos2[1]].setPiece(board[pos1[0]][pos1[1]].getPiece());
+		board[pos2[0]][pos2[1]].getPiece().setFileRank(entryNew);
+		board[pos1[0]][pos1[1]].setPiece(null);
+		*/
 	}
 	
 	public static void enpassant (BoardSpace[][] board, String entryOld, String entryNew) {
