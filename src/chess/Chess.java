@@ -91,9 +91,9 @@ public class Chess {
 			for (int j = 0; j < board.length; j++) 
 					board[i][j] = new BoardSpace(null);
 		
-		board[3][2] = new BoardSpace(new Pawn("bp", spots.charAt(0)+"5"));
-		board[3][4] = new BoardSpace(new Pawn("bp", spots.charAt(0)+"5"));
-		board[4][3] = new BoardSpace(new Pawn("wp", spots.charAt(0)+"4"));
+		board[3][2] = new BoardSpace(new Pawn("bp", spots.charAt(2)+"5"));
+		board[3][4] = new BoardSpace(new Pawn("bp", spots.charAt(4)+"5"));
+		board[4][3] = new BoardSpace(new Pawn("wp", spots.charAt(3)+"4"));
 	}
 	
 	public static void main (String[] args) {

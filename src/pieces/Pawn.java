@@ -40,8 +40,8 @@ public class Pawn extends Piece{
 		
 		
 		if(color == 'w'){ //white
-			System.out.print("Space in front of pawn a4: ");
-			System.out.println(board[position[0]-1][position[1]].getPiece().getPieceName().charAt(0));
+			//System.out.print("Space in front of pawn a4: ");
+			//System.out.println(board[position[0]-1][position[1]].getPiece().getPieceName().charAt(0));
 			//v --  prevents from pawn being able to take the other pawn right in front of it
 			if(position[0]<6 && board[position[0]-1][position[1]].getPiece().getPieceName().charAt(0)!='b' && board[position[0]-1][position[1]].getPiece().getPieceName().charAt(0)!='w' ) {
 				//can only move one spot
