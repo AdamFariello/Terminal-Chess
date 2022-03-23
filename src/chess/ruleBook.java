@@ -2,7 +2,7 @@ package chess;
 
 public class ruleBook {
 
-	public static void generalMove() {
+	public static void generalMove(BoardSpace[][] board, String entry1, String entry2) {
 		//This will cover:
 		//	 regularMove 
 		//   Pawns two space move
