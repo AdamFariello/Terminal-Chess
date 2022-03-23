@@ -29,6 +29,11 @@ public class Rook extends Piece {
 		
 		/*Calculation vertical spaces*/
 		//Going Up
+		System.out.println("Hello");
+		System.out.println(position[0]);
+		System.out.println(this.getFileRank());
+		
+		
 		for (int i = position[0] - 1; i > -1; i--) {
 			String temp = checkSpace(board, i, position[1]);
 			if (temp != null) {

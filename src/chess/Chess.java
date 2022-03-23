@@ -47,10 +47,7 @@ public class Chess {
 		//Black created first, then white.
 		//Rook
 		//TODO change back after move list is fine
-		//board[0][0] 			   			  = new BoardSpace(new Rook("bR", "a8"));
-		board[0][0] = new BoardSpace(null); 
-		board[3][3] 			   			  = new BoardSpace(new Rook("bR", "d5"));
-		
+		board[0][0] 			   			  = new BoardSpace(new Rook("bR", "a8")); 
 		board[0][board.length - 1] 			  = new BoardSpace(new Rook("bR", "h8"));
 		board[board.length - 1][0] 			  = new BoardSpace(new Rook("wR", "a1"));
 		board[board.length-1][board.length-1] = new BoardSpace(new Rook("wR", "h1"));
@@ -75,17 +72,20 @@ public class Chess {
 		
 		//Pawns
 		String spots = "abcdefgh";
-		for (int i = 0; i < board.length; i++) {
+		for (int i = 0; i < board.length; i++) { //change to i = 0 later
 			board[1][i] = new BoardSpace(new Pawn("bp", spots.charAt(i) + "7"));
 			board[board.length - 2][i] = new BoardSpace(new Pawn("wp", spots.charAt(i) + "2"));
 		}
 		
+
+		
 		//Blank Spaces
 		for (int i = 2; i < board.length - 2; i++)
 			for (int j = 0; j < board.length; j++) 
-				//TODO change 
-				if (i != 3 || j != 3) 
 					board[i][j] = new BoardSpace(null);
+		
+		board[2][0] = new BoardSpace(new Pawn("bp", spots.charAt(0)+"7"));
+		board[1][0] = new BoardSpace(null);
 	}
 	
 	public static void main (String[] args) {
@@ -95,9 +95,12 @@ public class Chess {
 		//White will always make the first move
 		boolean whiteTurn = true;
 		displayBoard();
-		board[3][3].getPiece().setMoveList(board);
-		System.out.println("Rook move List: " +board[3][3].getPiece().getMoveList());
+
+		board[6][1].getPiece().setMoveList(board);
+		board[2][0].getPiece().setMoveList(board);
 		
+		System.out.println("Pawn Move List: " +board[6][1].getPiece().getMoveList());
+		System.out.println("Black Pawn Move List: " +board[2][0].getPiece().getMoveList());
 		/* TODO uncomment
 		//Game Begin
 		while (true) {
