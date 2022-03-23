@@ -6,6 +6,8 @@ import chess.rankFileConversion;
 
 //Using name from: https://en.wikipedia.org/wiki/Chess#Movement
 public abstract class Piece {
+	public static Object getPieceName;
+
 	private String pieceName, fileRank;
 	
 	//Multi-list of spaces that a piece can be placed
