@@ -16,7 +16,7 @@ public class Pawn extends Piece{
 	}
 	String temp = getPieceName();
 	char color = temp.charAt(0);
-	
+	String temp2 = getFileRank();
 
 	@Override
 	public void setMoveList(BoardSpace[][] board) {
@@ -30,16 +30,15 @@ public class Pawn extends Piece{
 		
 		LinkedList<String> moves = new LinkedList<String>();
 		int[] position = rankFileConversion.RankFiletoArray(this.getFileRank());
-		
 		System.out.println("");
-		System.out.println("Hello");
-		for(int i = 0; i<position.length; i++)
-		{
-			System.out.println(position[i]);
+		System.out.println("rank/file: " + temp2);
+		System.out.println("color: " + color);
+		System.out.println("");
+		for(int i = 0 ; i< position.length; i++) {
+			System.out.println("position :" + position[i]);
 		}
 		
 		System.out.println(this.getFileRank());
-		
 		if(color == 'w'){
 			if(position[0]<6) {
 				//can only move one spot
