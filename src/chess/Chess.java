@@ -67,11 +67,7 @@ public class Chess {
 		board[0][3] 			   = new BoardSpace(new Queen("bQ","d8"));
 		board[board.length - 1][3] = new BoardSpace(new Queen("wQ","d1"));
 		
-		//TODO fix 
-		//board[0][4] 			   = new BoardSpace(new King("bK", "e8"));
-		board[0][4] 			   = new BoardSpace(null);
-		board[2][3] 			   = new BoardSpace(new King("bK", "d6"));
-		
+		board[0][4] 			   = new BoardSpace(new King("bK", "e8"));
 		board[board.length - 1][4] = new BoardSpace(new King("wK", "e1"));
 		
 		//Pawns
@@ -84,9 +80,9 @@ public class Chess {
 		//Blank Spaces
 		for (int i = 2; i < board.length - 2; i++)
 			for (int j = 0; j < board.length; j++) 
-				//TODO change 
-				//if (i != 2 || j != 3) 
-					board[i][j] = new BoardSpace(null);
+				board[i][j] = new BoardSpace(null);
+		
+		//Insert test code here
 	}
 	
 	public static void main (String[] args) {
