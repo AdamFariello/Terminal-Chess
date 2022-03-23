@@ -31,25 +31,31 @@ public class Pawn extends Piece{
 	public void setMoveList(BoardSpace[][] board) {
 		// TODO Auto-generated method stub
 		this.getMoveList().add(regularMove(board));
+		this.getMoveList().add(EnPassant(board));
 	}
 
-	public String checkSpace (BoardSpace[][] board, int x, int y, int direction) {
-		//[DEBUG] System.out.printf("Calculating (%d,%d) \n", x, y);
-		//Checks if the variables are in bound
-		if (x >= board.length || x < 0 || y >= board.length || y < 0) {
-			//Got tired of long looking code
-			Piece piece = board[x][y].getPiece();
-			char a = piece.getPieceName().charAt(0);
-			char b = this.getPieceName().charAt(0);
-			
-			//Checks for: 
-			//   1) Empty Space
-			//   2) Diagonal Space has enemy
-			if (piece == null || (piece != null && a != b)){
-				int [] temp = {x, y};
+	public String checkSpace (BoardSpace[][] board, int x, int y) {
+		try {
+			//[DEBUG] System.out.printf("Calculating pawn (%d,%d) \n", x, y);
+			//[DEBUG] System.out.println("Piece: " +board[x][y].getPiece());
+			if (board[x][y].getPiece() == null) {
+				int [] temp = {x,y};
 				return rankFileConversion.ArraytoRankFile(temp);
 			}
+		} catch (Exception e) {
+			System.out.println(e);
 		}
+		
+		return null;
+	}
+	public String checkCapture (BoardSpace[][] board, int x, int y) {
+		try {
+			//Piece piece = board[x][y].getPiece();
+			char a = board[x][y].getPiece().getPieceName().charAt(0);
+			char b = this.getPieceName().charAt(0);
+			if (a != b)
+				return board[x][y].getPiece().getFileRank();
+		} catch (Exception e) {}
 		
 		return null;
 	}
@@ -72,125 +78,35 @@ public class Pawn extends Piece{
 		else
 			direction = 1;
 		
-		//Capture
+		//Move
 		String temp = checkSpace(board, pos[0] + direction, pos[1]);
 		if(temp != null)
 			moves.add(temp);
 			
-		//Speed Capture
-		if (!this.hasMoved()) {
+		//Speed Move
+		if (this.hasMoved() == false) {
 			temp = checkSpace(board, pos[0] + (direction * 2), pos[1]);
 			if(temp != null)
 				moves.add(temp);
 		}
 		
-		//Capture
-		/*
-		x += direction;
-		Piece leftPiece  = board[x][y + (direction * -1)].getPiece();
-		Piece rightPiece = board[x][y + direction].getPiece();
-		*/
+		//Left Capture
+		temp = checkCapture(board, pos[0] + direction, pos[1] - 1);
+		if (temp != null)
+			moves.add(temp);
 		
-		/*
-		if(color == 'w'){
-			//System.out.print("Space in front of pawn a4: ");
-			//System.out.println(board[position[0]-1][position[1]].getPiece().getPieceName().charAt(0));
-			//v --  prevents from pawn being able to take the other pawn right in front of it
-			if(position[0]<6){//|| board[position[0]-1][position[1]].getPiece().getPieceName().charAt(0)!='b' && board[position[0]-1][position[1]].getPiece().getPieceName().charAt(0)!='w') {
-				//can only move one spot
-			for(int i = position[0]-1; i>position[0]-2; i--){
-				String temp = checkSpace(board, i, position[1]);
-				if(temp !=null) {
-					if(Character.isUpperCase(temp.charAt(0))==true) {
-						moves.add(temp.toLowerCase());
-						//moved = true;
-						break;
-					}
-					else {
-						moves.add(temp);
-					}
-				}
-				else {
-					break;
-				}
-			}
-		}
-			if(position[0]==6){// || board[position[0]-1][position[1]].getPiece().getPieceName().charAt(0)!='b' && board[position[0]-1][position[1]].getPiece().getPieceName().charAt(0)!='w') {
-			//can move two spots
-			for(int i = position[0]-1; i>position[0]-3; i--) {
-				String temp = checkSpace(board, i, position[1]);
-				if(temp!=null) {
-					if(Character.isUpperCase(temp.charAt(0))==true) {
-						moves.add(temp.toLowerCase());
-						break;
-					}
-					else {
-						moves.add(temp);
-					}
-				}
-				else {
-					break;
-					}
-				}
-		}
-		//check if pawn can be captured
-		
-			
-	} //bracket of if white statement
-		//if color is black
-		if(color == 'b') {
-			if(position[0]>1 && position[0]<6 && board[position[0]+1][position[1]].getPiece().getPieceName().charAt(0)!='b' && board[position[0]+1][position[1]].getPiece().getPieceName().charAt(0)!='w') {
-				//can only move one spot
-			for(int i = position[0]+1; i<position[0]+2; i++){
-				String temp = checkSpace(board, i, position[1]);
-				if(temp !=null) {
-					if(Character.isUpperCase(temp.charAt(0))==true) {
-						moves.add(temp.toLowerCase());
-						//moved = true;
-						break;
-					}
-					else {
-						moves.add(temp);
-					}
-				}
-				else {
-					break;
-				}
-			}
-		}
-		if(position[0]==1 && position[0]<6 && board[position[0]+1][position[1]].getPiece().getPieceName().charAt(0)!='b' && board[position[0]+1][position[1]].getPiece().getPieceName().charAt(0)!='w') {
-			//can move two spots
-			//i = 2, i<4; i++
-			for(int i = position[0]+1; i<position[0]+3; i++) {
-				String temp = checkSpace(board, i, position[1]);
-				if(temp!=null) {
-					if(Character.isUpperCase(temp.charAt(0))==true) {
-						moves.add(temp.toLowerCase());
-						break;
-					}
-					else {
-						moves.add(temp);
-					}
-				}
-				else {
-					break;
-					}
-				}
-			}
-		//example: 4,3 (row, column) = d4
-		//enemy on diagonals 
-		} //end of if black color
-		*/
+		//Right Capture
+		temp = checkCapture(board, pos[0] + direction, pos[1] + 1);
+		if (temp != null)
+			moves.add(temp);
 		
 		return moves;
 	}
 	
-	LinkedList<String> EnPassant() {
+	LinkedList<String> EnPassant(BoardSpace[][] board) {
+		
+		
 		return null;
 	}
 	
-	LinkedList<String> promotion(BoardSpace[][] board) {
-		//Not actually sure if this'll be a method...
-		return null;
-	}
 }

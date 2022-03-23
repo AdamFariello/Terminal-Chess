@@ -85,9 +85,17 @@ public class Chess {
 		//Blank Spaces
 		for (int i = 2; i < board.length - 2; i++)
 			for (int j = 0; j < board.length; j++) 
-				board[i][j] = new BoardSpace(null);
+				board[i][j] = new BoardSpace(null);		
+	}
+	
+	public static void main (String[] args) {
+		//Initialize
+		initializeBoard();
+		draw = false;
+		illegalMove = true;
+		turncount = 0;
 		
-		//TODO Insert test code here
+		//TODO Test Code
 		board[7][1].setPiece(null);
 		board[7][2].setPiece(null);
 		board[7][3].setPiece(null);
@@ -102,15 +110,10 @@ public class Chess {
 		
 		board[6][0].setPiece(null);
 		board[6][7].setPiece(null);
-	}
-	
-	public static void main (String[] args) {
-		//Initialize
-		initializeBoard();
-		draw = false;
-		illegalMove = true;
-		turncount = 0;
-	
+		
+		board[5][0].setPiece(new Pawn("bp", "a3"));
+		board[5][2].setPiece(new Pawn("wp", "c3"));
+		
 		displayBoard();
 		board[6][1].getPiece().prepareMoveList(board);
 		System.out.println("(6,1): " +board[6][1].getPiece().getMoveList());
