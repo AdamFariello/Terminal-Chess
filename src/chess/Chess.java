@@ -7,13 +7,17 @@ import chess.rankFileConversion;
 import pieces.Bishop;
 import pieces.Knight;
 import pieces.Pawn;
+import pieces.Piece;
 import pieces.Rook;
 import pieces.Queen;
 import pieces.King;
+import chess.ruleBook;
 
 public class Chess {
-	private static int boardSideLength = 8;
+	private static final int boardSideLength = 8;
 	private static BoardSpace board [][];
+	private static boolean draw, illegalMove;
+	private static int turncount;
 	
 	public static void displayBoard () {		
 		//Displaying the top part of the chess board	
@@ -44,6 +48,7 @@ public class Chess {
 	
 	public static void initializeBoard() {
 		board = new BoardSpace[boardSideLength][boardSideLength];	
+		
 		//Black created first, then white.
 		//Rook
 		//TODO change back after move list is fine
@@ -69,11 +74,15 @@ public class Chess {
 		board[0][3] 			   = new BoardSpace(new Queen("bQ","d8"));
 		board[board.length - 1][3] = new BoardSpace(new Queen("wQ","d1"));
 		
+
 		//TODO fix 
 		board[0][4] 			   = new BoardSpace(new King("bK", "e8"));
 		board[0][4] 			   = new BoardSpace(null);
 		board[2][3] 			   = new BoardSpace(new King("bK", "d6"));
 		
+
+		board[0][4] 			   = new BoardSpace(new King("bK", "e8"));
+
 		board[board.length - 1][4] = new BoardSpace(new King("wK", "e1"));
 		
 		//Pawns
@@ -95,11 +104,30 @@ public class Chess {
 		//board[3][2] = new BoardSpace(new Pawn("bp", spots.charAt(2)+"5"));
 		//board[3][4] = new BoardSpace(new Pawn("bp", spots.charAt(4)+"5"));
 		//board[4][3] = new BoardSpace(new Pawn("wp", spots.charAt(3)+"4"));
-		}
+
+		//board[i][j] = new BoardSpace(null);
+		
+		//TODO Insert test code here
+		board[7][1].setPiece(null);
+		board[7][2].setPiece(null);
+		board[7][3].setPiece(null);
+		board[7][5].setPiece(null);
+		board[7][6].setPiece(null);
+		
+		board[0][1].setPiece(null);
+		board[0][2].setPiece(null);
+		board[0][3].setPiece(null);
+		board[0][5].setPiece(null);
+		board[0][6].setPiece(null);
+		
+		board[6][0].setPiece(null);
+		board[6][7].setPiece(null);
+	}
 	
 	public static void main (String[] args) {
 		//Initialize
 		initializeBoard();
+
 		
 		//White will always make the first move
 		boolean whiteTurn = true;
@@ -114,23 +142,31 @@ public class Chess {
 		//System.out.println("Black Pawn Move List: " +board[3][0].getPiece().getMoveList());
 		System.out.println("White Pawn Move List: " +board[6][3].getPiece().getMoveList());
 		/* TODO uncomment
+
+		draw = false;
+		illegalMove = true;
+		turncount = 0;
 		//Game Begin
 		while (true) {
+			/*Setup turn*/
 			displayBoard();
+			illegalMove = true;
+			turncount++;
 			
-			while (true) {
-				if (whiteTurn)
-					System.out.print("White's move: ");
-				else
-					System.out.print("Black's move: ");
-				
-				//Taking an entry
+			if (turncount % 2 == 1) 
+				System.out.print("White's move: ");
+			else		   
+				System.out.print("Black's move: ");
+			
+			while (illegalMove) {
+				/*Taking an entry*/
 				//Also no need to check for illegal input
 				Scanner sc = new Scanner(System.in);
 				String entry = sc.nextLine();
 				String [] entrySplit = entry.split(" ");
 				String entry1 = entrySplit[0];
 				
+				//Checking other inputs
 				String entry2 = null, entry3 = null;
 				if (entrySplit.length > 1)
 					entry2 = entrySplit[1];
@@ -138,26 +174,44 @@ public class Chess {
 					entry3 = entrySplit[2];
 				
 				//Handling entries
-				//There is no such thing as bad input
-				//(Read question 3 in the Frequently Asked Questions)
-				if (entry1 != null && entry2 != null && entry3 == null) {
-					//Regular move
-					//TODO
-					
-					break;
-				} else if (entry1 != null && entry2 != null && entry3 != null) {
-					//Regular move with calling for a draw OR promotion
-					//TODO
+				/*TODO*/ 
+				if (entry1 != null && entry2 != null) {
+					draw = false;
 				
-					break;
-				} else {
-					//Answer to called for draw 
-					//TODO
+					//General
+					int [] pos = rankFileConversion.RankFiletoArray(entry1);
+					Piece piece = board[pos[0]][pos[1]].getPiece();
+					piece.setMoveList(board);
 					
-					break;
+					if (piece.contains(entry2)) {
+						char c = piece.getPieceName().charAt(1);
+						if (c == 'p' && piece.getMoveList().get(1).contains(entry2))
+							//TODO: Enpassant
+							ruleBook.enpassant();
+						else if (c == 'p' && piece.getMoveList().get(2).contains(entry2))
+							//TODO: Promotion
+							ruleBook.promition();		
+						else if (c == 'K' && piece.getMoveList().get(1).contains(entry2))
+							//TODO Castling
+							ruleBook.Casteling();
+						else
+							//TODO General Move
+							ruleBook.generalMove(board, entry1, entry2);
+						
+						illegalMove = false;
+						if (entry3 == "draw?")
+							draw = true;
+					} else {
+						System.out.println("Illegal move, try again");
+					}
+				} else {
+					//Conceding to a draw
+					if (draw)
+						System.exit(0);
+					else
+						System.out.println("Illegal move, try again");
 				}
 			}
 		}
-		*/
-	}
+	
 }

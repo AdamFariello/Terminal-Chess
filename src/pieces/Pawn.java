@@ -39,11 +39,18 @@ public class Pawn extends Piece{
 		}
 		
 		
+
 		if(color == 'w'){
 			//System.out.print("Space in front of pawn a4: ");
 			//System.out.println(board[position[0]-1][position[1]].getPiece().getPieceName().charAt(0));
 			//v --  prevents from pawn being able to take the other pawn right in front of it
 			if(position[0]<6){//|| board[position[0]-1][position[1]].getPiece().getPieceName().charAt(0)!='b' && board[position[0]-1][position[1]].getPiece().getPieceName().charAt(0)!='w') {
+
+			System.out.print("Space in front of pawn a4: ");
+			System.out.println(board[position[0]-1][position[1]].getPiece().getPieceName().charAt(0));
+			//v --  prevents from pawn being able to take the other pawn right in front of it
+			if(position[0]<6 && board[position[0]-1][position[1]].getPiece().getPieceName().charAt(0)!='b' && board[position[0]-1][position[1]].getPiece().getPieceName().charAt(0)!='w' ) {
+
 				//can only move one spot
 			for(int i = position[0]-1; i>position[0]-2; i--){
 				String temp = checkSpace(board, i, position[1]);
@@ -62,7 +69,10 @@ public class Pawn extends Piece{
 				}
 			}
 		}
+			}
+
 			if(position[0]==6){// || board[position[0]-1][position[1]].getPiece().getPieceName().charAt(0)!='b' && board[position[0]-1][position[1]].getPiece().getPieceName().charAt(0)!='w') {
+
 			//can move two spots
 			for(int i = position[0]-1; i>position[0]-3; i--) {
 				String temp = checkSpace(board, i, position[1]);
@@ -80,8 +90,32 @@ public class Pawn extends Piece{
 					}
 				}
 		}
+
 		//check if pawn can be captured
 		
+
+		//check if pawn can be captured on diagonals 
+			//example: 4,3 (row, column) = d4
+			//enemy on diagonals 
+			if(board[position[0]-1][position[1]+1].getPiece().getPieceName().charAt(0)=='b' || board[position[0]-1][position[1]-1].getPiece().getPieceName().charAt(0)=='b') {
+				for(int i = position[0]-1; i>position[0]-2; i--){
+					String temp = checkSpace(board, i, position[1]);
+					if(temp !=null) {
+						if(Character.isUpperCase(temp.charAt(0))==true) {
+							moves.add(temp.toLowerCase());
+							//moved = true;
+							break;
+						}
+						else {
+							moves.add(temp);
+						}
+					}
+					else {
+						break;
+					}
+				}
+			}
+
 			
 	} //bracket of if white statement
 		//if color is black
@@ -124,15 +158,19 @@ public class Pawn extends Piece{
 					}
 				}
 			}
+
 		//example: 4,3 (row, column) = d4
 		//enemy on diagonals 
+
+		
+
 		} //end of if black color
 		
 		
 		if(moves.isEmpty()) return null;
 		else return moves;
 	}
-}
+
 
 	
 	/*public boolean hasMoved()
@@ -150,4 +188,4 @@ public class Pawn extends Piece{
 	//	5) Promotion    := Pawn hits end of the board, it gets traded 
 	//					   for a: Queen, Rook, Bishop, or a castle
 
-
+}

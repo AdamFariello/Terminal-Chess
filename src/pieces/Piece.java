@@ -52,7 +52,7 @@ public abstract class Piece {
 	}
 	abstract LinkedList<String> regularMove (BoardSpace [][] board);
 	
-	//Getting variables
+	//Get methods
 	public String getPieceName () {
 		return pieceName;
 	}
@@ -63,16 +63,13 @@ public abstract class Piece {
 		return moveList;
 	}
 	
-	//toString
-	public void printMoveList() {
-		for (int i = 0; i < moveList.size(); i++) {
-			System.out.printf("MoveList %d: ", i);
-			if (moveList.get(i) == null)
-				for (int j = 0; j < moveList.get(i).size(); j++)
-					System.out.print(moveList.get(i).get(j) + ", ");
-			else
-				System.out.print("empty");
-			System.out.print("\n");
-		}
+	//check
+	public boolean contains(String fileRank) {
+		for (int i = 0; i < this.moveList.size(); i++)
+			if (this.moveList.get(i).contains(fileRank))
+				return true;
+			
+		return false;
 	}
+
 }
