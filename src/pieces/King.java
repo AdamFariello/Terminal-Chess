@@ -3,11 +3,14 @@ package pieces;
 import java.util.LinkedList;
 
 import chess.BoardSpace;
+import chess.rankFileConversion;
 
-public class King extends Piece{
+public class King extends Piece {
+	private boolean moved;
+	
 	public King(String pieceName, String fileRank) {
 		super(pieceName, fileRank);
-		// TODO Auto-generated constructor stub
+		moved = false;
 	}
 		
 	//Legal moves:
@@ -18,14 +21,32 @@ public class King extends Piece{
 	//					   to the other side of the king.
 	//					   https://en.wikipedia.org/wiki/Chess#Castling
 	@Override
-	void setMoveList(BoardSpace[][] board, String newfileRank) {
-		// TODO Auto-generated method stub
-		
+	public void setMoveList(BoardSpace[][] board) {
+		this.getMoveList().add(regularMove(board));
 	}
 
 	@Override
-	LinkedList<String> regularMove(BoardSpace[][] board, String fileRank) {
-		// TODO Auto-generated method stub
+	LinkedList<String> regularMove(BoardSpace[][] board) {
+		LinkedList<String> moves = new LinkedList<String>();
+		int [] position = rankFileConversion.RankFiletoArray(this.getFileRank());
+		
+		for (int i = position[0] - 1; i < position[0] + 2; i++) {
+			for (int j = position[1] - 1; j < position[1] + 2; j++) {
+				String temp = checkSpace(board, i, j);
+				if (temp != null && (i != position[0] || j != position[1]))
+					moves.add(temp);
+			}
+		}
+		
+		return moves;
+	}
+	
+	LinkedList<String> castling(BoardSpace[][] board) {
+		if (moved)
+			return null;
+		
+		
+		
 		return null;
 	}
 }

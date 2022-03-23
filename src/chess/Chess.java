@@ -66,7 +66,12 @@ public class Chess {
 		//Queen and King
 		board[0][3] 			   = new BoardSpace(new Queen("bQ","d8"));
 		board[board.length - 1][3] = new BoardSpace(new Queen("wQ","d1"));
-		board[0][4] 			   = new BoardSpace(new King("bK", "e8"));
+		
+		//TODO fix 
+		//board[0][4] 			   = new BoardSpace(new King("bK", "e8"));
+		board[0][4] 			   = new BoardSpace(null);
+		board[2][3] 			   = new BoardSpace(new King("bK", "d6"));
+		
 		board[board.length - 1][4] = new BoardSpace(new King("wK", "e1"));
 		
 		//Pawns
@@ -80,7 +85,7 @@ public class Chess {
 		for (int i = 2; i < board.length - 2; i++)
 			for (int j = 0; j < board.length; j++) 
 				//TODO change 
-				//if (i != 3 || j != 3) 
+				//if (i != 2 || j != 3) 
 					board[i][j] = new BoardSpace(null);
 	}
 	
@@ -91,6 +96,10 @@ public class Chess {
 		//White will always make the first move
 		boolean whiteTurn = true;
 		displayBoard();
+		
+		//TODO
+		//board[2][3].getPiece().setMoveList(board);
+		//System.out.println("Kings moves: " +board[2][3].getPiece().getMoveList());	
 		
 		/* TODO uncomment
 		//Game Begin

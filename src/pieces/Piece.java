@@ -25,16 +25,18 @@ public abstract class Piece {
 	}
 	public abstract void setMoveList (BoardSpace [][] board);
 	public String checkSpace (BoardSpace[][] board, int x, int y) {
-		//This combines regular move and capture, pawn will override this
+		//Method will (probably) be overflowed by pawn.java
 		//System.out.printf("Calculating (%d,%d) \n", x, y);
+		
+		//Checks if the variables are in bound
 		if (x >= board.length || x < 0 || y >= board.length || y < 0)
 			return null;
 		
+		//This combines regular move and capture
 		if (board[x][y].getPiece() == null) {
 			//Blank Space, free spot
 			int [] temp = {x, y};
 			return rankFileConversion.ArraytoRankFile(temp);
-			
 		} else if (board[x][y].getPiece() != null && 
 				   board[x][y].getPiece().getPieceName().charAt(0) != 
 				   this.getPieceName().charAt(0)) {
@@ -42,7 +44,6 @@ public abstract class Piece {
 			//and the space is occupied by a enemy piece
 			int [] temp = {x, y};
 			return rankFileConversion.ArraytoRankFile(temp).toUpperCase();
-			
 		} else {
 			return null;
 		}
