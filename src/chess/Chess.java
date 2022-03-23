@@ -7,6 +7,7 @@ import chess.rankFileConversion;
 import pieces.Bishop;
 import pieces.Knight;
 import pieces.Pawn;
+import pieces.Piece;
 import pieces.Rook;
 import pieces.Queen;
 import pieces.King;
@@ -82,7 +83,19 @@ public class Chess {
 			for (int j = 0; j < board.length; j++) 
 				board[i][j] = new BoardSpace(null);
 		
-		//Insert test code here
+		//TODO Insert test code here
+		board[7][1].setPiece(null);
+		board[7][2].setPiece(null);
+		board[7][3].setPiece(null);
+		board[7][5].setPiece(null);
+		board[7][6].setPiece(null);
+		
+		board[0][1].setPiece(null);
+		board[0][2].setPiece(null);
+		board[0][3].setPiece(null);
+		board[0][5].setPiece(null);
+		board[0][6].setPiece(null);
+		
 	}
 	
 	public static void main (String[] args) {
@@ -91,44 +104,48 @@ public class Chess {
 		
 		//White will always make the first move
 		boolean whiteTurn = true;
+		
+		/*TODO
 		displayBoard();
+		board[7][4].getPiece().setMoveList(board);
+		board[0][4].getPiece().setMoveList(board);
+		*/
 		
-		//TODO
-		//board[2][3].getPiece().setMoveList(board);
-		//System.out.println("Kings moves: " +board[2][3].getPiece().getMoveList());	
-		
-		/* TODO uncomment
+		/* TODO uncomment*/
 		//Game Begin
 		while (true) {
+			/*Setup turn*/
 			displayBoard();
+			if (whiteTurn) System.out.print("White's move: ");
+			else		   System.out.print("Black's move: ");
 			
 			while (true) {
-				if (whiteTurn)
-					System.out.print("White's move: ");
-				else
-					System.out.print("Black's move: ");
-				
-				//Taking an entry
+				/*Taking an entry*/
 				//Also no need to check for illegal input
 				Scanner sc = new Scanner(System.in);
 				String entry = sc.nextLine();
 				String [] entrySplit = entry.split(" ");
 				String entry1 = entrySplit[0];
 				
+				//Checking other inputs
 				String entry2 = null, entry3 = null;
 				if (entrySplit.length > 1)
 					entry2 = entrySplit[1];
 				if (entrySplit.length > 2)
 					entry3 = entrySplit[2];
 				
+				
 				//Handling entries
-				//There is no such thing as bad input
-				//(Read question 3 in the Frequently Asked Questions)
+				/*TODO*/ 
 				if (entry1 != null && entry2 != null && entry3 == null) {
-					//Regular move
-					//TODO
+					//Regular Moves
+					int [] pos = rankFileConversion.RankFiletoArray(entry1);
+					Piece piece = board[pos[0]][pos[1]].getPiece();
+					piece.setMoveList(board);
 					
-					break;
+					if (piece.contains(entry2)) {
+						
+					}
 				} else if (entry1 != null && entry2 != null && entry3 != null) {
 					//Regular move with calling for a draw OR promotion
 					//TODO
@@ -142,6 +159,5 @@ public class Chess {
 				}
 			}
 		}
-		*/
 	}
 }

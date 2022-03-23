@@ -8,8 +8,6 @@ public class ruleBook {
 		//   Pawns two space move
 		//   Capturing
 		
-		
-		
 	}
 	
 	public void enpassant () {
@@ -21,6 +19,7 @@ public class ruleBook {
 	}
 	
 	public void Casteling () {
+		
 		
 	}
 }

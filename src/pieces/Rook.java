@@ -7,10 +7,19 @@ import chess.rankFileConversion;
 
 //Castle == Rook == Train
 public class Rook extends Piece {
+	private boolean moved;
 	public Rook(String pieceName, String fileRank) {
 		super(pieceName, fileRank);
+		moved = false;
 	}
 
+	public boolean isMoved() {
+		return moved;
+	}
+	public void hasMoved() {
+		moved = true;
+	}
+	
 	//List of legal move:
 	//	1) Regular Move := Move to a space that's on it's same row or column
 	//  Note: The king handles castling, not the rook/Castle/train

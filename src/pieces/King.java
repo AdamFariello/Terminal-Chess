@@ -12,6 +12,13 @@ public class King extends Piece {
 		super(pieceName, fileRank);
 		moved = false;
 	}
+	
+	public boolean isMoved() {
+		return moved;
+	}
+	public void hasMoved() {
+		moved = true;
+	}
 		
 	//Legal moves:
 	//	1) Regular Move := Can move one space in any direction
@@ -23,6 +30,7 @@ public class King extends Piece {
 	@Override
 	public void setMoveList(BoardSpace[][] board) {
 		this.getMoveList().add(regularMove(board));
+		this.getMoveList().add(castling(board));
 	}
 
 	@Override
@@ -44,9 +52,33 @@ public class King extends Piece {
 	LinkedList<String> castling(BoardSpace[][] board) {
 		if (moved)
 			return null;
+
+		LinkedList<String> moves = new LinkedList<String>();
+		int [] position = rankFileConversion.RankFiletoArray(this.getFileRank());
 		
+		//Left Rook 
+		Rook leftRook = (Rook) board[position[0]][position[1] + 3].getPiece();
+		if (leftRook.isMoved() == false && 
+			board[position[0]][position[1] - 3].getPiece() == null && 
+			board[position[0]][position[1] - 2].getPiece() == null &&
+			board[position[0]][position[1] - 1].getPiece() == null) {
+			
+			int[] temp = {position[0], position[1] - 3};
+			moves.add(rankFileConversion.ArraytoRankFile(temp));
+		}
+			
+		//Right Rook
+		Rook rightRook = (Rook) board[position[0]][position[1] + 3].getPiece();
+		if (leftRook.isMoved() == false && 
+			board[position[0]][position[1] + 2].getPiece() == null &&
+			board[position[0]][position[1] + 1].getPiece() == null) {
+			
+			int[] temp = {position[0], position[1] + 2};
+			moves.add(rankFileConversion.ArraytoRankFile(temp));
+		}
 		
-		
-		return null;
+		return moves;
+		//if (moves.isEmpty()) return null;
+		//else return moves;
 	}
 }
