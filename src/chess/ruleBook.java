@@ -7,7 +7,12 @@ public class ruleBook {
 		//	 regularMove 
 		//   Pawns two space move
 		//   Capturing
+		int [] pos2 = rankFileConversion.RankFiletoArray(entry2);
+		int [] pos1 = rankFileConversion.RankFiletoArray(entry1);
 		
+		board[pos2[0]][pos2[1]].setPiece(board[pos1[0]][pos1[1]].getPiece());
+		board[pos2[0]][pos2[1]].getPiece().setFileRank(entry2);
+		board[pos1[0]][pos1[1]].setPiece(null);
 	}
 	
 	public static void enpassant () {

@@ -7,6 +7,8 @@ import chess.rankFileConversion;
 
 //Castle == Rook == Train
 public class Rook extends Piece {
+	//TODO: FIx horizontal movement not working
+	
 	private boolean moved;
 	public Rook(String pieceName, String fileRank) {
 		super(pieceName, fileRank);

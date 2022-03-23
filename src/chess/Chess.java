@@ -16,7 +16,8 @@ import chess.ruleBook;
 public class Chess {
 	private static final int boardSideLength = 8;
 	private static BoardSpace board [][];
-	private static boolean draw;
+	private static boolean draw, illegalMove;
+	private static int turncount;
 	
 	public static void displayBoard () {		
 		//Displaying the top part of the chess board	
@@ -99,22 +100,30 @@ public class Chess {
 		board[0][5].setPiece(null);
 		board[0][6].setPiece(null);
 		
+		board[6][0].setPiece(null);
+		board[6][7].setPiece(null);
 	}
 	
 	public static void main (String[] args) {
 		//Initialize
 		initializeBoard();
 		draw = false;
-		boolean whiteTurn = true;
+		illegalMove = true;
+		turncount = 0;
 	
 		//Game Begin
 		while (true) {
 			/*Setup turn*/
 			displayBoard();
-			if (whiteTurn) System.out.print("White's move: ");
-			else		   System.out.print("Black's move: ");
+			illegalMove = true;
+			turncount++;
 			
-			while (true) {
+			if (turncount % 2 == 1) 
+				System.out.print("White's move: ");
+			else		   
+				System.out.print("Black's move: ");
+			
+			while (illegalMove) {
 				/*Taking an entry*/
 				//Also no need to check for illegal input
 				Scanner sc = new Scanner(System.in);
@@ -152,13 +161,14 @@ public class Chess {
 							ruleBook.Casteling();
 						else
 							//TODO General Move
-							ruleBook.generalMove();
+							ruleBook.generalMove(board, entry1, entry2);
+						
+						illegalMove = false;
+						if (entry3 == "draw?")
+							draw = true;
 					} else {
 						System.out.println("Illegal move, try again");
 					}
-					
-					if (entry3 == "draw?")
-						draw = true;
 				} else {
 					//Conceding to a draw
 					if (draw)
