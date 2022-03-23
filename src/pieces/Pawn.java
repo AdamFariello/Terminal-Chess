@@ -5,6 +5,7 @@ import java.util.LinkedList;
 import chess.BoardSpace;
 
 public class Pawn extends Piece{
+
 	public Pawn(String pieceName, String fileRank) {
 		super(pieceName, fileRank);
 		// TODO Auto-generated constructor stub
@@ -19,13 +20,13 @@ public class Pawn extends Piece{
 	//	5) Promotion    := Pawn hits end of the board, it gets traded 
 	//					   for a: Queen, Rook, Bishop, or a castle
 	@Override
-	void setMoveList(BoardSpace[][] board, String newfileRank) {
+	public void setMoveList(BoardSpace[][] board) {
 		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
-	LinkedList<String> regularMove(BoardSpace[][] board, String fileRank) {
+	LinkedList<String> regularMove(BoardSpace[][] board) {
 		// TODO Auto-generated method stub
 		return null;
 	}

@@ -3,6 +3,7 @@ package pieces;
 import java.util.LinkedList;
 
 import chess.BoardSpace;
+import chess.rankFileConversion;
 
 public class Queen extends Piece{
 	public Queen(String pieceName, String fileRank) {
@@ -12,15 +13,24 @@ public class Queen extends Piece{
 
 	// Legal Moves:
 	//	1) Regular Move := Move same: column, row, or diagonal space.
+
 	@Override
-	void setMoveList(BoardSpace[][] board, String newfileRank) {
-		// TODO Auto-generated method stub
-		
+	public void setMoveList(BoardSpace[][] board) {
+		this.getMoveList().add(regularMove(board));
 	}
 
 	@Override
-	LinkedList<String> regularMove(BoardSpace[][] board, String fileRank) {
-		// TODO Auto-generated method stub
-		return null;
+	LinkedList<String> regularMove(BoardSpace[][] board) {
+		LinkedList<String> moves = new LinkedList<String>();
+		int [] position = rankFileConversion.RankFiletoArray(this.getFileRank());
+		
+		Rook rook = new Rook(this.getPieceName(), this.getFileRank());
+		moves.addAll(rook.regularMove(board));
+		
+		Bishop bishop = new Bishop(this.getPieceName(), this.getFileRank());
+		moves.addAll(bishop.regularMove(board));
+		
+		if (moves.isEmpty()) return null;
+		else return moves;
 	}
 }

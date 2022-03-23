@@ -48,6 +48,7 @@ public class Chess {
 		//Rook
 		//TODO change back after move list is fine
 		board[0][0] 			   			  = new BoardSpace(new Rook("bR", "a8")); 
+
 		board[0][board.length - 1] 			  = new BoardSpace(new Rook("bR", "h8"));
 		board[board.length - 1][0] 			  = new BoardSpace(new Rook("wR", "a1"));
 		board[board.length-1][board.length-1] = new BoardSpace(new Rook("wR", "h1"));
@@ -67,7 +68,12 @@ public class Chess {
 		//Queen and King
 		board[0][3] 			   = new BoardSpace(new Queen("bQ","d8"));
 		board[board.length - 1][3] = new BoardSpace(new Queen("wQ","d1"));
-		board[0][4] 			   = new BoardSpace(new King("bK", "e8"));
+		
+		//TODO fix 
+		//board[0][4] 			   = new BoardSpace(new King("bK", "e8"));
+		board[0][4] 			   = new BoardSpace(null);
+		board[2][3] 			   = new BoardSpace(new King("bK", "d6"));
+		
 		board[board.length - 1][4] = new BoardSpace(new King("wK", "e1"));
 		
 		//Pawns
@@ -98,6 +104,7 @@ public class Chess {
 
 		board[6][1].getPiece().setMoveList(board);
 		board[2][0].getPiece().setMoveList(board);
+
 		
 		System.out.println("Pawn Move List: " +board[6][1].getPiece().getMoveList());
 		System.out.println("Black Pawn Move List: " +board[2][0].getPiece().getMoveList());
