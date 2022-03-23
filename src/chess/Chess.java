@@ -113,15 +113,13 @@ public class Chess {
 		
 		board[5][0].setPiece(new Pawn("bp", "a3"));
 		board[5][2].setPiece(new Pawn("wp", "c3"));
+		board[3][4].setPiece(new Pawn("wp", "e5"));
+		board[3][5].setPiece(new Pawn("bp", "f5"));
 		
-		displayBoard();
-		board[6][1].getPiece().prepareMoveList(board);
-		System.out.println("(6,1): " +board[6][1].getPiece().getMoveList());
+		Pawn pawn = (Pawn) board[3][5].getPiece();
+		pawn.setJustUsedSpeedMove(true);
 		
-		board[1][1].getPiece().prepareMoveList(board);
-		System.out.println("(1,1): " +board[1][1].getPiece().getMoveList());
-		
-		/*
+		/**/
 		//Game Begin
 		while (true) {
 			//Setup turn
@@ -157,22 +155,29 @@ public class Chess {
 					//General
 					int [] pos = rankFileConversion.RankFiletoArray(entry1);
 					Piece piece = board[pos[0]][pos[1]].getPiece();
-					piece.setMoveList(board);
+					piece.prepareMoveList(board);
+					System.out.println("movelist: " +piece.getMoveList());
 					
 					if (piece.contains(entry2)) {
 						char c = piece.getPieceName().charAt(1);
-						if (c == 'p' && piece.getMoveList().get(1).contains(entry2))
+						if (c == 'p' && piece.getMoveList().get(1).contains(entry2)) {
+							//TODO: speedMove
+							
+						} else if (c == 'p' && piece.getMoveList().get(2).contains(entry2)) {
 							//TODO: Enpassant
-							ruleBook.enpassant();
-						else if (c == 'p' && piece.getMoveList().get(2).contains(entry2))
+							ruleBook.enpassant(board, entry1, entry2);
+							
+						} else if (c == 'p' && piece.getMoveList().get(2).contains(entry2)) {
 							//TODO: Promotion
 							ruleBook.promition();		
-						else if (c == 'K' && piece.getMoveList().get(1).contains(entry2))
+							
+						} else if (c == 'K' && piece.getMoveList().get(1).contains(entry2)) {
 							//TODO Castling
 							ruleBook.Casteling();
-						else
+						} else {
 							//TODO General Move
 							ruleBook.generalMove(board, entry1, entry2);
+						}
 						
 						illegalMove = false;
 						if (entry3 == "draw?")
@@ -189,6 +194,5 @@ public class Chess {
 				}
 			}
 		}
-		*/
 	}
 }
