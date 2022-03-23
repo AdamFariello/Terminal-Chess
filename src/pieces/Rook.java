@@ -1,3 +1,10 @@
+/**
+ * 
+ * @author Edison Flores
+ * @author Adam Fariello
+ * 
+ */
+
 package pieces;
 
 import java.util.LinkedList;
@@ -10,14 +17,26 @@ public class Rook extends Piece {
 	//TODO: FIx horizontal movement not working
 	
 	private boolean moved;
+	
+	/**
+	 * Generates the rook piece
+	 * @param pieceName file/rank of piece
+	 * @param fileRank file/rank of where piece will be moved
+	 */
 	public Rook(String pieceName, String fileRank) {
 		super(pieceName, fileRank);
 		moved = false;
 	}
-
+	/**
+	 * checks if a piece has been moved
+	 * @return
+	 */
 	public boolean isMoved() {
 		return moved;
 	}
+	/**
+	 * changes moved to true;
+	 */
 	public void hasMoved() {
 		moved = true;
 	}
@@ -26,25 +45,25 @@ public class Rook extends Piece {
 	//	1) Regular Move := Move to a space that's on it's same row or column
 	//  Note: The king handles castling, not the rook/Castle/train
 	@Override
+	/**
+	 * add moves to board
+	 */
 	public void setMoveList(BoardSpace[][] board) {
 		// TODO Auto-generated method stub
 		this.getMoveList().add(regularMove(board));
 	}
 
 	@Override
+	/**
+	 * list of regular moves piece can make
+	 */
 	LinkedList<String> regularMove(BoardSpace[][] board) {
 		LinkedList<String> moves = new LinkedList<String>();
 		
 		//(vertical, horizontal)
 		int [] position = rankFileConversion.RankFiletoArray(this.getFileRank());
 		
-		/*Calculation vertical spaces*/
 		//Going Up
-		System.out.println("Hello");
-		System.out.println(position[0]);
-		System.out.println(this.getFileRank());
-		
-		
 		for (int i = position[0] - 1; i > -1; i--) {
 			String temp = checkSpace(board, i, position[1]);
 			if (temp != null) {
@@ -76,9 +95,10 @@ public class Rook extends Piece {
 		}
 		
 		/*Calculation horizontal spaces*/
+		
 		//Left 
-		for (int i = position[1] - 1; i > -1; i--) {
-			String temp = checkSpace(board, position[1], i);
+		for (int i = position[1] - 1; i >=0 ; i--) {
+			String temp = checkSpace(board, position[0], i);
 			if (temp != null) {
 				if (Character.isUpperCase(temp.charAt(0)) == true) {
 					moves.add(temp.toLowerCase());
@@ -93,7 +113,7 @@ public class Rook extends Piece {
 		
 		//Right 		
 		for (int i = position[1] + 1; i < board.length; i++) {
-			String temp = checkSpace(board, position[1], i);
+			String temp = checkSpace(board, position[0], i);
 			if (temp != null) {
 				if (Character.isUpperCase(temp.charAt(0)) == true) {
 					moves.add(temp.toLowerCase());

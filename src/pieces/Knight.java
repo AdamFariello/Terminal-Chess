@@ -1,3 +1,10 @@
+/**
+ * 
+ * @author Edison Flores
+ * @author Adam Fariello
+ * 
+ */
+
 package pieces;
 
 import java.util.LinkedList;
@@ -7,6 +14,11 @@ import chess.rankFileConversion;
 
 public class Knight extends Piece{
 
+	/**
+	 * Constructor for Night piece
+	 * @param pieceName
+	 * @param fileRank
+	 */
 	public Knight(String pieceName, String fileRank) {
 		super(pieceName, fileRank);
 		// TODO Auto-generated constructor stub
@@ -16,12 +28,20 @@ public class Knight extends Piece{
 	// 	1) Regular Move := Move 2 spaces in the same column then 
 	// 					   move 1 space in the same row, and vice-versa
 	@Override
+	
+	/**
+	 * sets the move list from board
+	 */
 	public void setMoveList(BoardSpace[][] board) {
 		// TODO Auto-generated method stub
 		this.getMoveList().add(regularMove(board));
 	}
 
 	@Override
+	
+	/**
+	 * Makes list of regular moves able to b made
+	 */
 	LinkedList<String> regularMove(BoardSpace[][] board) {
 		LinkedList<String> moves = new LinkedList<String>();
 		int [] position = rankFileConversion.RankFiletoArray(this.getFileRank());

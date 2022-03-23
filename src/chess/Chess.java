@@ -1,5 +1,13 @@
+/**
+ * 
+ * @author Edison Flores
+ * @author Adam Fariello
+ * 
+ */
+
 package chess;
 
+import java.util.LinkedList;
 import java.util.Scanner;
 
 import chess.BoardSpace;
@@ -19,6 +27,9 @@ public class Chess {
 	private static boolean draw, illegalMove;
 	private static int turncount;
 	
+	/**
+	 * Method to display the board
+	 */
 	public static void displayBoard () {		
 		//Displaying the top part of the chess board	
 		System.out.print("\n");
@@ -46,13 +57,18 @@ public class Chess {
 		}
 	}
 	
+	/**
+	 * Creates the board
+	 */
 	public static void initializeBoard() {
 		board = new BoardSpace[boardSideLength][boardSideLength];	
 		
 		//Black created first, then white.
 		//Rook
 		//TODO change back after move list is fine
+		
 		board[0][0] 			   			  = new BoardSpace(new Rook("bR", "a8")); 
+		//board[0][0] = new BoardSpace(null);
 
 		board[0][board.length - 1] 			  = new BoardSpace(new Rook("bR", "h8"));
 		board[board.length - 1][0] 			  = new BoardSpace(new Rook("wR", "a1"));
@@ -93,7 +109,7 @@ public class Chess {
 		}
 		
 
-		//board[1][2] = new BoardSpace(null);
+		board[1][0] = new BoardSpace(null);
 		//board[1][4] = new BoardSpace(null);
 		//board[6][3] = new BoardSpace(null);
 		//Blank Spaces
@@ -124,6 +140,10 @@ public class Chess {
 		board[6][7].setPiece(null);
 	}
 	
+	/**
+	 * main method, displays board and takes input
+	 * @param args
+	 */
 	public static void main (String[] args) {
 		//Initialize
 		initializeBoard();
@@ -131,17 +151,24 @@ public class Chess {
 		
 		//White will always make the first move
 		boolean whiteTurn = true;
-		displayBoard();
+		//displayBoard(); //uncomment later
 
-		board[6][3].getPiece().setMoveList(board);
+		board[7][7].getPiece().prepareMoveList(board);
 		//board[3][0].getPiece().setMoveList(board);
 		//board[4][3].getPiece().setMoveList(board);
+		for(int i =0 ; i<board.length; i++) {
+			for(int j = 0; j<board.length; j++) {
+				if(board[i][j].getPiece()==null) {
+					break;
+				}
 
+			}
+		}
 		
 		//System.out.println("Pawn Move List: " +board[6][1].getPiece().getMoveList());
 		//System.out.println("Black Pawn Move List: " +board[3][0].getPiece().getMoveList());
-		System.out.println("White Pawn Move List: " +board[6][3].getPiece().getMoveList());
-		/* TODO uncomment
+		//System.out.println("White Rook Move List: " +board[7][7].getPiece().getMoveList());
+		// TODO uncomment
 
 		draw = false;
 		illegalMove = true;
@@ -149,7 +176,7 @@ public class Chess {
 		//Game Begin
 		while (true) {
 			/*Setup turn*/
-			displayBoard();
+			displayBoard(); //comment out later
 			illegalMove = true;
 			turncount++;
 			
@@ -161,6 +188,7 @@ public class Chess {
 			while (illegalMove) {
 				/*Taking an entry*/
 				//Also no need to check for illegal input
+				
 				Scanner sc = new Scanner(System.in);
 				String entry = sc.nextLine();
 				String [] entrySplit = entry.split(" ");
@@ -175,13 +203,21 @@ public class Chess {
 				
 				//Handling entries
 				/*TODO*/ 
-				if (entry1 != null && entry2 != null) {
+				if (entry1 != null && entry2 != null) { //
 					draw = false;
 				
 					//General
 					int [] pos = rankFileConversion.RankFiletoArray(entry1);
 					Piece piece = board[pos[0]][pos[1]].getPiece();
-					piece.setMoveList(board);
+					piece.prepareMoveList(board);
+					
+					
+					
+					//check opponents moves
+					
+					
+					//piece.setMoveList(board);
+					//System.out.println("Move list: "+ piece.getMoveList()); //comment out later
 					
 					if (piece.contains(entry2)) {
 						char c = piece.getPieceName().charAt(1);
@@ -194,6 +230,7 @@ public class Chess {
 						else if (c == 'K' && piece.getMoveList().get(1).contains(entry2))
 							//TODO Castling
 							ruleBook.Casteling();
+						
 						else
 							//TODO General Move
 							ruleBook.generalMove(board, entry1, entry2);
@@ -213,5 +250,5 @@ public class Chess {
 				}
 			}
 		}
-	
+	}
 }

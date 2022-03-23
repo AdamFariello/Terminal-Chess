@@ -1,5 +1,11 @@
-package pieces;
+/**
+ * 
+ * @author Edison Flores
+ * @author Adam Fariello
+ * 
+ */
 
+package pieces;
 import java.util.LinkedList;
 
 import chess.BoardSpace;
@@ -9,7 +15,11 @@ public class Pawn extends Piece{
 
 	
 	boolean moved = false;
-	//wp, a3
+	/**
+	 * Constructor for pawn
+	 * @param pieceName
+	 * @param fileRank
+	 */
 	public Pawn(String pieceName, String fileRank) {
 		super(pieceName, fileRank);
 		// TODO Auto-generated constructor stub
@@ -19,12 +29,18 @@ public class Pawn extends Piece{
 	String temp2 = getFileRank();
 
 	@Override
+	/**
+	 * Sets the move in list
+	 */
 	public void setMoveList(BoardSpace[][] board) {
 		// TODO Auto-generated method stub
 		this.getMoveList().add(regularMove(board));
 	}
 
 	@Override
+	/**
+	 * Adds list of moves in Linked List
+	 */
 	LinkedList<String> regularMove(BoardSpace[][] board) {
 		// TODO Auto-generated method stub
 		

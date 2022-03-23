@@ -1,3 +1,11 @@
+/**
+ * 
+ * @author Edison Flores
+ * @author Adam Fariello
+ * 
+ */
+
+
 package pieces;
 
 import java.util.LinkedList;
@@ -6,6 +14,12 @@ import chess.BoardSpace;
 import chess.rankFileConversion;
 
 public class Bishop extends Piece{
+	
+	/**
+	 * bishop constructor
+	 * @param pieceName file/rank of piece
+	 * @param fileRank where piece will move to
+	 */
 	public Bishop(String pieceName, String fileRank) {
 		super(pieceName, fileRank);
 		// TODO Auto-generated constructor stub
@@ -14,11 +28,17 @@ public class Bishop extends Piece{
 	// Legal Moves:
 	// 	1) Regular Move := Move anywhere in the same diagonal space
 	@Override
+	/**
+	 * sets moves to list
+	 */
 	public void setMoveList(BoardSpace[][] board) {
 		this.getMoveList().add(regularMove(board));
 	}
 
 	@Override
+	/**
+	 * list of regular moves
+	 */
 	LinkedList<String> regularMove(BoardSpace[][] board) {
 		// TODO Auto-generated method stub
 		LinkedList<String> moves = new LinkedList<String>();

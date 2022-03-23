@@ -1,3 +1,10 @@
+/**
+ * 
+ * @author Edison Flores
+ * @author Adam Fariello
+ * 
+ */
+
 package pieces;
 
 import java.util.LinkedList;
@@ -8,14 +15,25 @@ import chess.rankFileConversion;
 public class King extends Piece {
 	private boolean moved;
 	
+	/**
+	 * King constructor
+	 * @param pieceName file/rank
+	 * @param fileRank file/rank where it will be moved
+	 */
 	public King(String pieceName, String fileRank) {
 		super(pieceName, fileRank);
 		moved = false;
 	}
-	
+	/**
+	 * returns moved if true
+	 * @return
+	 */
 	public boolean isMoved() {
 		return moved;
 	}
+	/**
+	 * initializes moved to true
+	 */
 	public void hasMoved() {
 		moved = true;
 	}
@@ -28,12 +46,20 @@ public class King extends Piece {
 	//					   to the other side of the king.
 	//					   https://en.wikipedia.org/wiki/Chess#Castling
 	@Override
+	/*
+	 * makes the move list from board. 
+	 * adds moves
+	 */
 	public void setMoveList(BoardSpace[][] board) {
 		this.getMoveList().add(regularMove(board));
 		this.getMoveList().add(castling(board));
 	}
 
 	@Override
+	
+	/**
+	 * list of regular moves able to be made
+	 */
 	LinkedList<String> regularMove(BoardSpace[][] board) {
 		LinkedList<String> moves = new LinkedList<String>();
 		int [] position = rankFileConversion.RankFiletoArray(this.getFileRank());
@@ -48,7 +74,11 @@ public class King extends Piece {
 		
 		return moves;
 	}
-	
+	/**
+	 * checks if king can castle or not
+	 * @param board
+	 * @return
+	 */
 	LinkedList<String> castling(BoardSpace[][] board) {
 		if (moved)
 			return null;

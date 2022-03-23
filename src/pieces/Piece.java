@@ -1,3 +1,10 @@
+/**
+ * 
+ * @author Edison Flores
+ * @author Adam Fariello
+ * 
+ */
+
 package pieces;
 import java.util.LinkedList;
 
@@ -15,17 +22,48 @@ public abstract class Piece {
 	//If there is no space all moves will be null. 
 	private LinkedList<LinkedList <String>> moveList;
 	
+	/**
+	 * constructor for general piece
+	 * @param pieceName rank/file
+	 * @param fileRank rank/file where piece will go
+	 */
 	public Piece (String pieceName, String fileRank) {
 		this.pieceName = pieceName;
 		this.fileRank  = fileRank;
 		moveList 	   = new LinkedList<LinkedList<String>>();
 	}
 	
-	//Setting Variables
+	/**
+	 * Sets the file rank (where piece will be put)
+	 * @param fileRank
+	 */
 	public void setFileRank(String fileRank) {
 		this.fileRank = fileRank;
 	}
+	
+	/**
+	 * creates move list
+	 * @param board
+	 */
 	public abstract void setMoveList (BoardSpace [][] board);
+	
+	/**
+	 * resets move list
+	 * @param board
+	 */
+	public void prepareMoveList(BoardSpace[][] board) {
+        this.getMoveList().clear();
+        setMoveList(board);
+    }
+	
+	/**
+	 * Checks the space where it will go
+	 * Avoids going out of bounds
+	 * @param board
+	 * @param x
+	 * @param y
+	 * @return
+	 */
 	public String checkSpace (BoardSpace[][] board, int x, int y) {
 		//Method will (probably) be overflowed by pawn.java
 		//System.out.printf("Calculating (%d,%d) \n", x, y);
@@ -52,18 +90,35 @@ public abstract class Piece {
 	}
 	abstract LinkedList<String> regularMove (BoardSpace [][] board);
 	
-	//Get methods
+	/**
+	 * getter for piece name
+	 * @return
+	 */
 	public String getPieceName () {
 		return pieceName;
 	}
+	
+	/**
+	 * getter for file Rank
+	 * @return
+	 */
 	public String getFileRank() {
 		return fileRank;
 	}
+	
+	/**
+	 * Gets the move list of piece
+	 * @return
+	 */
 	public LinkedList<LinkedList<String>> getMoveList() {
 		return moveList;
 	}
 	
-	//check
+	/**
+	 * Checks if there is a valid move in the move list. 
+	 * @param fileRank
+	 * @return Returns false if input is not in the move list
+	 */
 	public boolean contains(String fileRank) {
 		for (int i = 0; i < this.moveList.size(); i++)
 			if (this.moveList.get(i).contains(fileRank))
