@@ -84,14 +84,14 @@ public class Chess {
 		}
 		
 
-		
+		board[1][0] = new BoardSpace(null);
 		//Blank Spaces
 		for (int i = 2; i < board.length - 2; i++)
 			for (int j = 0; j < board.length; j++) 
 					board[i][j] = new BoardSpace(null);
 		
-		board[2][0] = new BoardSpace(new Pawn("bp", spots.charAt(0)+"7"));
-		board[1][0] = new BoardSpace(null);
+		board[2][0] = new BoardSpace(new Pawn("bp", spots.charAt(0)+"6"));
+		//board[1][0] = new BoardSpace(null);
 	}
 	
 	public static void main (String[] args) {
@@ -102,11 +102,11 @@ public class Chess {
 		boolean whiteTurn = true;
 		displayBoard();
 
-		board[6][1].getPiece().setMoveList(board);
+		//board[6][1].getPiece().setMoveList(board);
 		board[2][0].getPiece().setMoveList(board);
 
 		
-		System.out.println("Pawn Move List: " +board[6][1].getPiece().getMoveList());
+		//System.out.println("Pawn Move List: " +board[6][1].getPiece().getMoveList());
 		System.out.println("Black Pawn Move List: " +board[2][0].getPiece().getMoveList());
 		/* TODO uncomment
 		//Game Begin
