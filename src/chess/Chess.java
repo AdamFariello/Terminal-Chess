@@ -70,8 +70,7 @@ public class Chess {
 		board[board.length - 1][3] = new BoardSpace(new Queen("wQ","d1"));
 		
 		//TODO fix 
-		//board[0][4] 			   = new BoardSpace(new King("bK", "e8"));
-		board[0][4] 			   = new BoardSpace(null);
+		board[0][4] 			   = new BoardSpace(new King("bK", "e8"));
 		board[2][3] 			   = new BoardSpace(new King("bK", "d6"));
 		
 		board[board.length - 1][4] = new BoardSpace(new King("wK", "e1"));
@@ -84,14 +83,17 @@ public class Chess {
 		}
 		
 
-		board[1][0] = new BoardSpace(null);
+		board[1][2] = new BoardSpace(null);
+		board[1][4] = new BoardSpace(null);
+		board[6][3] = new BoardSpace(null);
 		//Blank Spaces
 		for (int i = 2; i < board.length - 2; i++)
 			for (int j = 0; j < board.length; j++) 
 					board[i][j] = new BoardSpace(null);
 		
-		board[2][0] = new BoardSpace(new Pawn("bp", spots.charAt(0)+"6"));
-		//board[1][0] = new BoardSpace(null);
+		board[3][2] = new BoardSpace(new Pawn("bp", spots.charAt(0)+"5"));
+		board[3][4] = new BoardSpace(new Pawn("bp", spots.charAt(0)+"5"));
+		board[4][3] = new BoardSpace(new Pawn("wp", spots.charAt(0)+"4"));
 	}
 	
 	public static void main (String[] args) {
@@ -102,12 +104,15 @@ public class Chess {
 		boolean whiteTurn = true;
 		displayBoard();
 
-		//board[6][1].getPiece().setMoveList(board);
-		board[2][0].getPiece().setMoveList(board);
+		//board[3][2].getPiece().setMoveList(board);
+		//board[3][4].getPiece().setMoveList(board);
+		board[4][3].getPiece().setMoveList(board);
 
 		
 		//System.out.println("Pawn Move List: " +board[6][1].getPiece().getMoveList());
-		System.out.println("Black Pawn Move List: " +board[2][0].getPiece().getMoveList());
+		//System.out.println("Black Pawn Move List: " +board[3][0].getPiece().getMoveList());
+		
+		System.out.println("White Pawn Move List: " +board[4][3].getPiece().getMoveList());
 		/* TODO uncomment
 		//Game Begin
 		while (true) {
