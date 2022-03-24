@@ -57,19 +57,12 @@ public class Chess {
 		}
 	}
 	
-	/**
-	 * Creates the board
-	 */
+	/*Creates the board*/
 	public static void initializeBoard() {
 		board = new BoardSpace[boardSideLength][boardSideLength];	
 		
-		//Black created first, then white.
 		//Rook
-		//TODO change back after move list is fine
-		
 		board[0][0] 			   			  = new BoardSpace(new Rook("bR", "a8")); 
-		//board[0][0] = new BoardSpace(null);
-
 		board[0][board.length - 1] 			  = new BoardSpace(new Rook("bR", "h8"));
 		board[board.length - 1][0] 			  = new BoardSpace(new Rook("wR", "a1"));
 		board[board.length-1][board.length-1] = new BoardSpace(new Rook("wR", "h1"));
@@ -89,16 +82,7 @@ public class Chess {
 		//Queen and King
 		board[0][3] 			   = new BoardSpace(new Queen("bQ","d8"));
 		board[board.length - 1][3] = new BoardSpace(new Queen("wQ","d1"));
-		
-
-		//TODO fix 
 		board[0][4] 			   = new BoardSpace(new King("bK", "e8"));
-		board[0][4] 			   = new BoardSpace(null);
-		board[2][3] 			   = new BoardSpace(new King("bK", "d6"));
-		
-
-		board[0][4] 			   = new BoardSpace(new King("bK", "e8"));
-
 		board[board.length - 1][4] = new BoardSpace(new King("wK", "e1"));
 		
 		//Pawns
@@ -108,10 +92,6 @@ public class Chess {
 			board[board.length - 2][i] = new BoardSpace(new Pawn("wp", spots.charAt(i) + "2"));
 		}
 		
-
-		board[1][0] = new BoardSpace(null);
-		//board[1][4] = new BoardSpace(null);
-		//board[6][3] = new BoardSpace(null);
 		//Blank Spaces
 		for (int i = 2; i < board.length - 2; i++)
 			for (int j = 0; j < board.length; j++) 
@@ -121,39 +101,20 @@ public class Chess {
 	public static void main (String[] args) {
 		//Initialize
 		initializeBoard();
+		ruleBook.initalize();
 		draw = false;
 		illegalMove = true;
 		turncount = 0;
 		
-		//TODO Test Code
-		board[7][1].setPiece(null);
-		board[7][2].setPiece(null);
-		board[7][3].setPiece(null);
-		board[7][5].setPiece(null);
-		board[7][6].setPiece(null);
-		
-		board[0][1].setPiece(null);
-		board[0][2].setPiece(null);
-		board[0][3].setPiece(null);
-		board[0][5].setPiece(null);
-		board[0][6].setPiece(null);
-		
-		board[6][0].setPiece(null);
-		board[6][7].setPiece(null);
-		
-		board[5][0].setPiece(new Pawn("bp", "a3"));
-		board[5][2].setPiece(new Pawn("wp", "c3"));
-		board[3][4].setPiece(new Pawn("wp", "e5"));
-		board[3][5].setPiece(new Pawn("bp", "f5"));
-		
-		Pawn pawn = (Pawn) board[3][5].getPiece();
-		pawn.setJustUsedSpeedMove(true);
+		//TODO Test Code		
+		//board[1][5].setPiece(new Pawn("f7"));
 		
 		/**/
 		//Game Begin
 		while (true) {
 			//Setup turn
 			displayBoard();
+			
 			illegalMove = true;
 			turncount++;
 			
@@ -191,17 +152,31 @@ public class Chess {
 					
 					if (piece.contains(entry2)) {
 						char c = piece.getPieceName().charAt(1);
-						if (c == 'p' && piece.getMoveList().get(1).contains(entry2)) {
-							ruleBook.speedMove(board, entry1, entry2);
+						if (c == 'p') {
+							((Pawn) piece).updateHasMoved();
 							
-						} else if (c == 'p' && piece.getMoveList().get(2).contains(entry2)) {
-							//TODO: Enpassant
-							ruleBook.enpassant(board, entry1, entry2);
+							if (piece.getMoveList().get(0).contains(entry2)) {
+								//Handling regular method
+								((Pawn) piece).setJustUsedSpeedMove(false);
+								ruleBook.generalMove(board, entry1, entry2);
 							
-						} else if (c == 'p' && piece.getMoveList().get(2).contains(entry2)) {
-							//TODO: Promotion
-							ruleBook.promition();		
+							} else if (piece.getMoveList().get(1).contains(entry2)) {
+								//Handling regular method
+								((Pawn) piece).setJustUsedSpeedMove(true);
+								ruleBook.generalMove(board, entry1, entry2);	
+								
+							} else {
+								//TODO: Enpassant
+								ruleBook.enpassant(board, entry1, entry2);
+							}
 							
+							//Checking for Promition
+							if (piece.getFileRank().charAt(1) == '8' || 
+								piece.getFileRank().charAt(1) == '1') {
+								board[pos[0]][pos[1]] = 
+									ruleBook.promition(board[pos[0]][pos[1]], piece, entry3);		
+							}
+								
 						} else if (c == 'K' && piece.getMoveList().get(1).contains(entry2)) {
 							//TODO Castling
 							ruleBook.Casteling();
