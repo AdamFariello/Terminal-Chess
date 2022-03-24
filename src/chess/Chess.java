@@ -115,15 +115,17 @@ public class Chess {
 		//Blank Spaces
 		for (int i = 2; i < board.length - 2; i++)
 			for (int j = 0; j < board.length; j++) 
-					board[i][j] = new BoardSpace(null);
+				board[i][j] = new BoardSpace(null);		
+	}
+	
+	public static void main (String[] args) {
+		//Initialize
+		initializeBoard();
+		draw = false;
+		illegalMove = true;
+		turncount = 0;
 		
-		//board[3][2] = new BoardSpace(new Pawn("bp", spots.charAt(2)+"5"));
-		//board[3][4] = new BoardSpace(new Pawn("bp", spots.charAt(4)+"5"));
-		//board[4][3] = new BoardSpace(new Pawn("wp", spots.charAt(3)+"4"));
-
-		//board[i][j] = new BoardSpace(null);
-		
-		//TODO Insert test code here
+		//TODO Test Code
 		board[7][1].setPiece(null);
 		board[7][2].setPiece(null);
 		board[7][3].setPiece(null);
@@ -138,45 +140,20 @@ public class Chess {
 		
 		board[6][0].setPiece(null);
 		board[6][7].setPiece(null);
-	}
-	
-	/**
-	 * main method, displays board and takes input
-	 * @param args
-	 */
-	public static void main (String[] args) {
-		//Initialize
-		initializeBoard();
-
 		
-		//White will always make the first move
-		boolean whiteTurn = true;
-		//displayBoard(); //uncomment later
-
-		board[7][7].getPiece().prepareMoveList(board);
-		//board[3][0].getPiece().setMoveList(board);
-		//board[4][3].getPiece().setMoveList(board);
-		for(int i =0 ; i<board.length; i++) {
-			for(int j = 0; j<board.length; j++) {
-				if(board[i][j].getPiece()==null) {
-					break;
-				}
-
-			}
-		}
+		board[5][0].setPiece(new Pawn("bp", "a3"));
+		board[5][2].setPiece(new Pawn("wp", "c3"));
+		board[3][4].setPiece(new Pawn("wp", "e5"));
+		board[3][5].setPiece(new Pawn("bp", "f5"));
 		
-		//System.out.println("Pawn Move List: " +board[6][1].getPiece().getMoveList());
-		//System.out.println("Black Pawn Move List: " +board[3][0].getPiece().getMoveList());
-		//System.out.println("White Rook Move List: " +board[7][7].getPiece().getMoveList());
-		// TODO uncomment
-
-		draw = false;
-		illegalMove = true;
-		turncount = 0;
+		Pawn pawn = (Pawn) board[3][5].getPiece();
+		pawn.setJustUsedSpeedMove(true);
+		
+		/**/
 		//Game Begin
 		while (true) {
-			/*Setup turn*/
-			displayBoard(); //comment out later
+			//Setup turn
+			displayBoard();
 			illegalMove = true;
 			turncount++;
 			
@@ -186,7 +163,7 @@ public class Chess {
 				System.out.print("Black's move: ");
 			
 			while (illegalMove) {
-				/*Taking an entry*/
+				//Taking an entry
 				//Also no need to check for illegal input
 				
 				
@@ -203,64 +180,72 @@ public class Chess {
 					entry3 = entrySplit[2];
 				
 				//Handling entries
-				/*TODO*/ 
-				if (entry1 != null && entry2 != null) { //
+				//TODO 
+				if (entry1 != null && entry2 != null) {
 					draw = false;
 				
 					//General
 					int [] pos = rankFileConversion.RankFiletoArray(entry1);
 					Piece piece = board[pos[0]][pos[1]].getPiece();
 					piece.prepareMoveList(board);
-					
-					
-					
-					//check opponents moves
-					
-					
-					//piece.setMoveList(board);
-					//System.out.println("Move list: "+ piece.getMoveList()); //comment out later
+					System.out.println("movelist: " +piece.getMoveList());
 					
 					if (piece.contains(entry2)) {
 						char c = piece.getPieceName().charAt(1);
-						if (c == 'p' && piece.getMoveList().get(1).contains(entry2))
+						if (c == 'p' && piece.getMoveList().get(1).contains(entry2)) {
+							ruleBook.speedMove(board, entry1, entry2);
+							
+						} else if (c == 'p' && piece.getMoveList().get(2).contains(entry2)) {
 							//TODO: Enpassant
-							ruleBook.enpassant();
-						else if (c == 'p' && piece.getMoveList().get(2).contains(entry2))
+							ruleBook.enpassant(board, entry1, entry2);
+							
+						} else if (c == 'p' && piece.getMoveList().get(2).contains(entry2)) {
 							//TODO: Promotion
 							ruleBook.promition();		
-						else if (c == 'K' && piece.getMoveList().get(1).contains(entry2))
+							
+						} else if (c == 'K' && piece.getMoveList().get(1).contains(entry2)) {
 							//TODO Castling
 							ruleBook.Casteling();
+						}
 						
 						else {
 							//TODO General Move
-							ruleBook.generalMove(board, entry1, entry2);
-							if (turncount % 2 == 1) { //white
+							ruleBook.generalMove(board, entry1, entry2); 
 							Set<String> whiteMoves = new HashSet<String>();
-							
+							Set<String> blackMoves = new HashSet<String>();
 							for(int i = 0; i<board.length; i++) {
 								for(int j = 0; j<board.length; j++) {
 									LinkedList<String>moves = new LinkedList<String>();
+									String temp = checkSpace(board, board[i][j].getPiece().getPieceName()., i);
+									
 									//temp = (board[i][j].getPiece().getMoveList());
+									
+										
 									
 									}
 								}
-							}
 						}
+
+						} else {
+							//TODO General Move
+							ruleBook.generalMove(board, entry1, entry2);
+						}
+						
 						illegalMove = false;
 						if (entry3 == "draw?")
 							draw = true;
 					} else {
 						System.out.println("Illegal move, try again");
 					}
-				} else {
+				 
 					//Conceding to a draw
-					if (draw)
-						System.exit(0);
-					else
+					
+					if (draw) {
+						System.exit(0);}
+					else {
 						System.out.println("Illegal move, try again");
+						}
 				}
 			}
 		}
 	}
-}
