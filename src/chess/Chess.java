@@ -9,7 +9,7 @@ package chess;
 
 import java.util.LinkedList;
 import java.util.Scanner;
-
+import java.util.*;
 import chess.BoardSpace;
 import chess.rankFileConversion;
 import pieces.Bishop;
@@ -189,6 +189,7 @@ public class Chess {
 				/*Taking an entry*/
 				//Also no need to check for illegal input
 				
+				
 				Scanner sc = new Scanner(System.in);
 				String entry = sc.nextLine();
 				String [] entrySplit = entry.split(" ");
@@ -231,10 +232,21 @@ public class Chess {
 							//TODO Castling
 							ruleBook.Casteling();
 						
-						else
+						else {
 							//TODO General Move
 							ruleBook.generalMove(board, entry1, entry2);
-						
+							if (turncount % 2 == 1) { //white
+							Set<String> whiteMoves = new HashSet<String>();
+							
+							for(int i = 0; i<board.length; i++) {
+								for(int j = 0; j<board.length; j++) {
+									LinkedList<String>moves = new LinkedList<String>();
+									//temp = (board[i][j].getPiece().getMoveList());
+									
+									}
+								}
+							}
+						}
 						illegalMove = false;
 						if (entry3 == "draw?")
 							draw = true;
