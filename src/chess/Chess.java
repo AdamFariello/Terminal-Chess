@@ -107,7 +107,9 @@ public class Chess {
 		turncount = 0;
 		
 		//TODO Test Code		
-		//board[1][5].setPiece(new Pawn("f7"));
+		board[0][5].setPiece(null);
+		board[1][5].setPiece(new Pawn("wp", "f7"));
+		
 		
 		/**/
 		//Game Begin
@@ -148,6 +150,8 @@ public class Chess {
 					int [] pos = rankFileConversion.RankFiletoArray(entry1);
 					Piece piece = board[pos[0]][pos[1]].getPiece();
 					piece.prepareMoveList(board);
+					
+					//TODO remove
 					System.out.println("movelist: " +piece.getMoveList());
 					
 					if (piece.contains(entry2)) {
@@ -171,10 +175,11 @@ public class Chess {
 							}
 							
 							//Checking for Promition
-							if (piece.getFileRank().charAt(1) == '8' || 
-								piece.getFileRank().charAt(1) == '1') {
+							if (entry2.charAt(1) == '8' || entry2.charAt(1) == '1') {
+								pos = rankFileConversion.RankFiletoArray(entry2);
+								System.out.printf("(%d,%d)", pos[0], pos[1]);
 								board[pos[0]][pos[1]] = 
-									ruleBook.promition(board[pos[0]][pos[1]], piece, entry3);		
+									ruleBook.promition(board[pos[0]][pos[1]], entry3);		
 							}
 								
 						} else if (c == 'K' && piece.getMoveList().get(1).contains(entry2)) {

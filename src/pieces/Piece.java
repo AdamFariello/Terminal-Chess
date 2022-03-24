@@ -52,7 +52,7 @@ public abstract class Piece {
 	 * @param board
 	 */
 	public void prepareMoveList(BoardSpace[][] board) {
-        this.getMoveList().clear();
+		this.getMoveList().clear();
         setMoveList(board);
     }
 	

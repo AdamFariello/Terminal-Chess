@@ -80,7 +80,6 @@ public class Knight extends Piece{
 			}
 		}
 		
-		if (moves.isEmpty()) return null;
-		else return moves;
+		return moves;
 	}
 }

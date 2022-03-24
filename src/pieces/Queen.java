@@ -50,7 +50,6 @@ public class Queen extends Piece{
 		Bishop bishop = new Bishop(this.getPieceName(), this.getFileRank());
 		moves.addAll(bishop.regularMove(board));
 		
-		if (moves.isEmpty()) return null;
-		else return moves;
+		return moves;
 	}
 }

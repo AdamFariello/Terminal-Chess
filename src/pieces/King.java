@@ -108,7 +108,5 @@ public class King extends Piece {
 		}
 		
 		return moves;
-		//if (moves.isEmpty()) return null;
-		//else return moves;
 	}
 }

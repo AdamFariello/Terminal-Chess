@@ -63,7 +63,8 @@ public class ruleBook {
 		board[pos2[0] + (pawn.getDirection() * -1)][pos2[1]].setPiece(null); 
 	}
 	
-	public static BoardSpace promition (BoardSpace boardSpace, Piece piece, String promotion) {
+	public static BoardSpace promition (BoardSpace boardSpace, String promotion) {
+		Piece piece = boardSpace.getPiece();
 		switch (promotion) {
 			case "R":
 				String string = piece.getPieceName().charAt(0) + "R";
@@ -90,12 +91,9 @@ public class ruleBook {
 		return boardSpace;
 	}
 	
-	/**
-	 * When a king can castle
-	 */
+	/*When a king can castle */
 	public static void Casteling() {
 		
 		
 	}
-
 }

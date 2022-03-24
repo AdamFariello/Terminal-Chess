@@ -126,7 +126,6 @@ public class Rook extends Piece {
 			}
 		}
 		
-		if (moves.isEmpty()) return null;
-		else return moves;
+		return moves;
 	}
 }
