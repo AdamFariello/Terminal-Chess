@@ -40,6 +40,9 @@ public class Pawn extends Piece{
 	public void setJustUsedSpeedMove(boolean bool) {
 		justUsedSpeedMove = bool;
 	}
+	public void updateHasMoved() {
+		hasMoved = true;
+	}
 	
 	//List of legal move:
 	//	1) Regular Move := Move one space in any point of the game    
