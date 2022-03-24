@@ -105,14 +105,7 @@ public class Chess {
 		draw = false;
 		illegalMove = true;
 		turncount = 0;
-		
-		//TODO Test Code		
-		board[7][1].setPiece(null);
-		board[7][2].setPiece(null);
-		board[7][3].setPiece(null);
-		board[7][5].setPiece(null);
-		board[7][6].setPiece(null);
-		
+				
 		/**/
 		//Game Begin
 		while (true) {
