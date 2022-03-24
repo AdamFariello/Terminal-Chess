@@ -93,7 +93,7 @@ public class King extends Piece {
 			board[position[0]][position[1] - 2].getPiece() == null &&
 			board[position[0]][position[1] - 1].getPiece() == null) {
 			
-			int[] temp = {position[0], position[1] - 3};
+			int[] temp = {position[0], position[1] - 2};
 			moves.add(rankFileConversion.ArraytoRankFile(temp));
 		}
 			

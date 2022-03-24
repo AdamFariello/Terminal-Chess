@@ -107,9 +107,11 @@ public class Chess {
 		turncount = 0;
 		
 		//TODO Test Code		
-		board[0][5].setPiece(null);
-		board[1][5].setPiece(new Pawn("wp", "f7"));
-		
+		board[7][1].setPiece(null);
+		board[7][2].setPiece(null);
+		board[7][3].setPiece(null);
+		board[7][5].setPiece(null);
+		board[7][6].setPiece(null);
 		
 		/**/
 		//Game Begin
@@ -186,8 +188,8 @@ public class Chess {
 							}
 								
 						} else if (c == 'K' && piece.getMoveList().get(1).contains(entry2)) {
-							//TODO Castling
-							ruleBook.Casteling();
+							//Castling
+							ruleBook.Casteling(board, entry1, entry2);
 						} else {
 							//General Move
 							ruleBook.generalMove(board, entry1, entry2);

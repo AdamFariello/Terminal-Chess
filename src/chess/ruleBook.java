@@ -10,6 +10,7 @@ package chess;
 import java.util.ArrayList;
 
 import pieces.Bishop;
+import pieces.King;
 import pieces.Knight;
 import pieces.Pawn;
 import pieces.Piece;
@@ -98,8 +99,27 @@ public class ruleBook {
 	}
 	
 	/*When a king can castle */
-	public static void Casteling() {
+	public static void Casteling(BoardSpace[][] board, String entryOld, String entryNew) {
+		int [] pos1 = rankFileConversion.RankFiletoArray(entryOld);
+		int [] pos2 = rankFileConversion.RankFiletoArray(entryNew);
 		
+		//Aproach:
+		//   1) replace new spot with old piece
+		//   2) update old spot to new spot name
+		//   3) Make old spot null
+		board[pos2[0]][pos2[1]].setPiece(board[pos1[0]][pos1[1]].getPiece());
+		board[pos2[0]][pos2[1]].getPiece().setFileRank(entryNew);
+		board[pos1[0]][pos1[1]].setPiece(null);
+		
+		if (entryNew.charAt(0) == 'c') {
+			Rook rook = (Rook) board[pos2[0]][0].getPiece();
+			board[pos2[0]][pos2[1] + 1].setPiece(rook);
+			board[pos2[0]][0].setPiece(null);
+		} else {
+			Rook rook = (Rook) board[pos2[0]][board.length - 1].getPiece();
+			board[pos2[0]][pos2[1] - 1].setPiece(rook);
+			board[pos2[0]][board.length - 1].setPiece(null);
+		}
 		
 	}
 }
