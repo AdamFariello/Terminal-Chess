@@ -10,6 +10,7 @@ package chess;
 import java.util.ArrayList;
 
 import pieces.Bishop;
+import pieces.King;
 import pieces.Knight;
 import pieces.Pawn;
 import pieces.Piece;
@@ -63,41 +64,62 @@ public class ruleBook {
 		board[pos2[0] + (pawn.getDirection() * -1)][pos2[1]].setPiece(null); 
 	}
 	
-	public static BoardSpace promition (BoardSpace boardSpace, Piece piece, String promotion) {
+	public static Piece promition (Piece oldPiece, String promotion) {
 		switch (promotion) {
 			case "R":
-				String string = piece.getPieceName().charAt(0) + "R";
-				boardSpace.setPiece(new Rook(string, piece.getFileRank()));
-				pawnPromotions.remove("R");
+				if (pawnPromotions.contains("R")) {
+					pawnPromotions.remove("R");
+					return new Rook(oldPiece.getPieceName().charAt(0) + "R", oldPiece.getFileRank());
+				}
 				break;
+			
 			case "K":
-				string = piece.getPieceName().charAt(0) + "K";
-				boardSpace.setPiece(new Knight(string, piece.getFileRank()));
-				pawnPromotions.remove("K");
+				if (pawnPromotions.contains("K")) {
+					pawnPromotions.remove("K");
+					return new Knight(oldPiece.getPieceName().charAt(0) + "K", oldPiece.getFileRank());
+				}
 				break;
+				
 			case "B":
-				string = piece.getPieceName().charAt(0) + "B";
-				boardSpace.setPiece(new Bishop(string, piece.getFileRank()));
-				pawnPromotions.remove("B");
+				if (pawnPromotions.contains("B")) {
+					pawnPromotions.remove("B");
+					return new Bishop(oldPiece.getPieceName().charAt(0) + "B", oldPiece.getFileRank());
+				}
 				break;
+				
 			default:
-				string = piece.getPieceName().charAt(0) + "Q";
-				boardSpace.setPiece(new Queen(string, piece.getFileRank()));
-				pawnPromotions.remove("Q");
+				if (pawnPromotions.contains("Q")) {
+					pawnPromotions.remove("Q");
+					return new Queen(oldPiece.getPieceName().charAt(0) + "Q", oldPiece.getFileRank());
+				}
 				break;
 		}
 		
-		return boardSpace;
+		return null;
 	}
 	
-	/**
-	 * When a king can castle
-	 */
-	public static void Casteling() {
+	/*When a king can castle */
+	public static void Casteling(BoardSpace[][] board, String entryOld, String entryNew) {
+		int [] pos1 = rankFileConversion.RankFiletoArray(entryOld);
+		int [] pos2 = rankFileConversion.RankFiletoArray(entryNew);
 		
+		//Aproach:
+		//   1) replace new spot with old piece
+		//   2) update old spot to new spot name
+		//   3) Make old spot null
+		board[pos2[0]][pos2[1]].setPiece(board[pos1[0]][pos1[1]].getPiece());
+		board[pos2[0]][pos2[1]].getPiece().setFileRank(entryNew);
+		board[pos1[0]][pos1[1]].setPiece(null);
+		
+		if (entryNew.charAt(0) == 'c') {
+			Rook rook = (Rook) board[pos2[0]][0].getPiece();
+			board[pos2[0]][pos2[1] + 1].setPiece(rook);
+			board[pos2[0]][0].setPiece(null);
+		} else {
+			Rook rook = (Rook) board[pos2[0]][board.length - 1].getPiece();
+			board[pos2[0]][pos2[1] - 1].setPiece(rook);
+			board[pos2[0]][board.length - 1].setPiece(null);
+		}
 		
 	}
-	
-	
-
 }

@@ -68,7 +68,7 @@ public class Pawn extends Piece{
 				return rankFileConversion.ArraytoRankFile(temp);
 			}
 		} catch (Exception e) {
-			System.out.println(e);
+			//[Debug] System.out.println(e);
 		}
 		
 		return null;
@@ -137,24 +137,27 @@ public class Pawn extends Piece{
 		int[] pos = rankFileConversion.RankFiletoArray(this.getFileRank());
 		
 		//Left Piece
-		Pawn pawn = (Pawn) board[pos[0]][pos[1] - 1].getPiece();
-		int i = (this.getFileRank().charAt(1) - '0') + (direction*3);
-		if (pawn != null &&
-			pawn.justUsedSpeedMove == true && (i == 7 || i == 2) && 
-			pawn.getPieceName().charAt(0) != this.getPieceName().charAt(0)) {
-			int [] temp = {pos[0] + direction, pos[1] - 1};
-			moves.add(rankFileConversion.ArraytoRankFile(temp));
-		}
+		try {
+			Pawn pawn = (Pawn) board[pos[0]][pos[1] - 1].getPiece();
+			int i = (this.getFileRank().charAt(1) - '0') + (direction*3);
+			if (pawn.justUsedSpeedMove == true && (i == 7 || i == 2) && 
+				pawn.getPieceName().charAt(0) != this.getPieceName().charAt(0)) {
+				int [] temp = {pos[0] + direction, pos[1] - 1};
+				moves.add(rankFileConversion.ArraytoRankFile(temp));
+			}
+		} catch (Exception e) {}
 		
 		//Right Piece
-		pawn = (Pawn) board[pos[0]][pos[1] + 1].getPiece();
-		i = (this.getFileRank().charAt(1) - '0') + (direction*3);
-		if (pawn != null &&
-			pawn.justUsedSpeedMove == true && (i == 7 || i == 2) &&
-			pawn.getPieceName().charAt(0) != this.getPieceName().charAt(0)) {
-			int [] temp = {pos[0] + direction, pos[1] + 1};
-			moves.add(rankFileConversion.ArraytoRankFile(temp));
-		}
+		
+		try {
+			Pawn pawn = (Pawn) board[pos[0]][pos[1] + 1].getPiece();
+			int i = (this.getFileRank().charAt(1) - '0') + (direction*3);
+			if (pawn.justUsedSpeedMove == true && (i == 7 || i == 2) &&
+				pawn.getPieceName().charAt(0) != this.getPieceName().charAt(0)) {
+				int [] temp = {pos[0] + direction, pos[1] + 1};
+				moves.add(rankFileConversion.ArraytoRankFile(temp));
+			}
+		} catch (Exception e) {}
 		
 		return moves;
 	}
