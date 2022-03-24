@@ -68,7 +68,7 @@ public class Pawn extends Piece{
 				return rankFileConversion.ArraytoRankFile(temp);
 			}
 		} catch (Exception e) {
-			System.out.println(e);
+			//[Debug] System.out.println(e);
 		}
 		
 		return null;

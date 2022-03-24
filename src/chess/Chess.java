@@ -170,23 +170,26 @@ public class Chess {
 								ruleBook.generalMove(board, entry1, entry2);	
 								
 							} else {
-								//TODO: Enpassant
+								//Enpassant
 								ruleBook.enpassant(board, entry1, entry2);
 							}
 							
 							//Checking for Promition
 							if (entry2.charAt(1) == '8' || entry2.charAt(1) == '1') {
 								pos = rankFileConversion.RankFiletoArray(entry2);
-								System.out.printf("(%d,%d)", pos[0], pos[1]);
-								board[pos[0]][pos[1]] = 
-									ruleBook.promition(board[pos[0]][pos[1]], entry3);		
+								Piece oldPiece = board[pos[0]][pos[1]].getPiece();	
+								
+								if (entry3 == null) 
+									board[pos[0]][pos[1]].setPiece(ruleBook.promition(oldPiece, ""));
+								else
+									board[pos[0]][pos[1]].setPiece(ruleBook.promition(oldPiece, entry3));
 							}
 								
 						} else if (c == 'K' && piece.getMoveList().get(1).contains(entry2)) {
 							//TODO Castling
 							ruleBook.Casteling();
 						} else {
-							//TODO General Move
+							//General Move
 							ruleBook.generalMove(board, entry1, entry2);
 						}
 						

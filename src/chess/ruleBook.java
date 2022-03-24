@@ -63,32 +63,38 @@ public class ruleBook {
 		board[pos2[0] + (pawn.getDirection() * -1)][pos2[1]].setPiece(null); 
 	}
 	
-	public static BoardSpace promition (BoardSpace boardSpace, String promotion) {
-		Piece piece = boardSpace.getPiece();
+	public static Piece promition (Piece oldPiece, String promotion) {
 		switch (promotion) {
 			case "R":
-				String string = piece.getPieceName().charAt(0) + "R";
-				boardSpace.setPiece(new Rook(string, piece.getFileRank()));
-				pawnPromotions.remove("R");
+				if (pawnPromotions.contains("R")) {
+					pawnPromotions.remove("R");
+					return new Rook(oldPiece.getPieceName().charAt(0) + "R", oldPiece.getFileRank());
+				}
 				break;
+			
 			case "K":
-				string = piece.getPieceName().charAt(0) + "K";
-				boardSpace.setPiece(new Knight(string, piece.getFileRank()));
-				pawnPromotions.remove("K");
+				if (pawnPromotions.contains("K")) {
+					pawnPromotions.remove("K");
+					return new Knight(oldPiece.getPieceName().charAt(0) + "K", oldPiece.getFileRank());
+				}
 				break;
+				
 			case "B":
-				string = piece.getPieceName().charAt(0) + "B";
-				boardSpace.setPiece(new Bishop(string, piece.getFileRank()));
-				pawnPromotions.remove("B");
+				if (pawnPromotions.contains("B")) {
+					pawnPromotions.remove("B");
+					return new Bishop(oldPiece.getPieceName().charAt(0) + "B", oldPiece.getFileRank());
+				}
 				break;
+				
 			default:
-				string = piece.getPieceName().charAt(0) + "Q";
-				boardSpace.setPiece(new Queen(string, piece.getFileRank()));
-				pawnPromotions.remove("Q");
+				if (pawnPromotions.contains("Q")) {
+					pawnPromotions.remove("Q");
+					return new Queen(oldPiece.getPieceName().charAt(0) + "Q", oldPiece.getFileRank());
+				}
 				break;
 		}
 		
-		return boardSpace;
+		return null;
 	}
 	
 	/*When a king can castle */
